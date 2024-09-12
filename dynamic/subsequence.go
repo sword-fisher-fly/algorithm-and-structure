@@ -141,7 +141,6 @@ func LongestCommonSubSequenceII(s1 string, s2 string) int {
 
 // 5） 最长子序和
 // dp[i]: 以nums[i-1]结尾的最长子序列和
-
 func MaxSumOfSubSequence(nums []int) int {
 	if len(nums) == 0 {
 		return 0
@@ -194,8 +193,6 @@ func IsSubsequence(s, t string) bool {
 		for j := 1; j <= len(t); j++ {
 			if s[i-1] == t[j-1] {
 				dp[i][j] = dp[i-1][j-1] + 1
-
-				// fmt.Printf("dp[%d][%d]=%d\n", i, j, dp[i][j])
 			} else {
 				// 剔除t[j-1], s是不变的
 				dp[i][j] = dp[i][j-1]
@@ -209,3 +206,44 @@ func IsSubsequence(s, t string) bool {
 // TODO:
 // 7) 不相同子序列
 // https://www.programmercarl.com/0115.%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AD%90%E5%BA%8F%E5%88%97.html#%E6%80%9D%E8%B7%AF
+// 字符串s在字符串t子序列中出现的次数
+// dp[i][j]: s[:i]中出现t[:j]形式子序列次数
+func NumOfSubsequence(s, t string) int {
+	if len(s) == 0 {
+		return 0
+	}
+
+	if len(t) == 0 {
+		return 1
+	}
+
+	dp := make([][]int, len(s)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(t)+1)
+	}
+
+	for i := 0; i <= len(s); i++ {
+		dp[i][0] = 1
+	}
+
+	for j := 1; j <= len(t); j++ {
+		dp[0][j] = 0
+	}
+
+	for i := 1; i <= len(s); i++ {
+		for j := 1; j <= len(t); j++ {
+			if s[i-1] == t[j-1] {
+				dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
+			} else {
+				dp[i][j] = dp[i-1][j]
+			}
+		}
+	}
+
+	// fmt.Printf("s=%s, t=%s, dp=%v\n", s, t, dp)
+
+	return dp[len(s)][len(t)]
+}
+
+// 8)  不相交的线
+// 与最长公共子序列相同

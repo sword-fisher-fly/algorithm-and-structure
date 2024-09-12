@@ -43,6 +43,28 @@ func IsBalancedTreeByRecursive(root *TreeNode) bool {
 }
 
 func IsBalancedTreeByIteration(root *TreeNode) bool {
+	if root == nil {
+		return true
+	}
+
+	stack := []*TreeNode{root}
+
+	for len(stack) != 0 {
+		curNode := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+
+		if abs(getHeight(curNode.Left)-getHeight(curNode.Right)) > 1 {
+			return false
+		}
+
+		if curNode.Right != nil {
+			stack = append(stack, curNode.Right)
+		}
+
+		if curNode.Left != nil {
+			stack = append(stack, curNode.Left)
+		}
+	}
 
 	return true
 }

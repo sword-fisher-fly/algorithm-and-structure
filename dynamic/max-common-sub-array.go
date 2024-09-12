@@ -1,5 +1,6 @@
 package dynamic
 
+// 子数组连续
 // dp[i][j]: 表示以下标 i-1 为结尾的 arr1 和以下标 j-1 为结尾的 arr2 的最长公共子数组的长度
 func MaxCommonSubArray(arr1 []int, arr2 []int) int {
 	dp := make([][]int, len(arr1)+1)

@@ -195,22 +195,22 @@ func TestIsSubsequence(t *testing.T) {
 		args args
 		want bool
 	}{
-		// {
-		// 	name: "the same string",
-		// 	args: args{
-		// 		s: "abc",
-		// 		t: "abc",
-		// 	},
-		// 	want: true,
-		// },
-		// {
-		// 	name: "different string 1",
-		// 	args: args{
-		// 		s: "abc",
-		// 		t: "abd",
-		// 	},
-		// 	want: false,
-		// },
+		{
+			name: "the same string",
+			args: args{
+				s: "abc",
+				t: "abc",
+			},
+			want: true,
+		},
+		{
+			name: "different string 1",
+			args: args{
+				s: "abc",
+				t: "abd",
+			},
+			want: false,
+		},
 		{
 			name: "different string 2",
 			args: args{
@@ -224,6 +224,50 @@ func TestIsSubsequence(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := IsSubsequence(tt.args.s, tt.args.t); got != tt.want {
 				t.Errorf("IsSubsequence() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNumOfSubsequence(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "the same string",
+			args: args{
+				s: "abc",
+				t: "abc",
+			},
+			want: 1,
+		},
+		{
+			name: "different string 1",
+			args: args{
+				s: "rababbit",
+				t: "rabbit",
+			},
+			want: 4,
+		},
+		{
+			name: "different string 2",
+			args: args{
+				s: "babgbag",
+				t: "bag",
+			},
+			want: 5,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NumOfSubsequence(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("NumOfSubsequence() = %v, want %v", got, tt.want)
 			}
 		})
 	}

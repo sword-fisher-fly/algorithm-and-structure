@@ -23,12 +23,14 @@ func TestSubsets(t *testing.T) {
 		{
 			name: "2 items",
 			args: args{arr: []int{1, 2}},
-			want: [][]int{{}, {1}, {2}, {1, 2}},
+			// want: [][]int{{}, {1}, {2}, {1, 2}},
+			want: [][]int{{}, {1}, {1, 2}, {2}},
 		},
 		{
 			name: "3 items",
 			args: args{arr: []int{1, 2, 3}},
-			want: [][]int{{}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}},
+			// want: [][]int{{}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}},
+			want: [][]int{{}, {1}, {1, 2}, {1, 2, 3}, {1, 3}, {2}, {2, 3}, {3}},
 		},
 	}
 	for _, tt := range tests {

@@ -58,3 +58,4 @@ func BinarySearchInSortedArrayRecursive(arr []int, target int) int {
 
 	return BinarySearchInSortedArrayRecursive(arr[mid+1:], target)
 }
+
