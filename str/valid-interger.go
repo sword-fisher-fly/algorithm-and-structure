@@ -1,7 +1,5 @@
 package str
 
-import "fmt"
-
 // 1) -0      true
 // 2) +0       true
 // 3) -012     false
@@ -67,7 +65,6 @@ func isValidIntergerAfterDot(s string) bool {
 		return false
 	}
 
-	fmt.Printf("== isValidIntergerAfterDot: %s\n", s)
 	for i := range s {
 		if s[i] < '0' || s[i] > '9' {
 			return false

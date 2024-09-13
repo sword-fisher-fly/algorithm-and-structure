@@ -68,7 +68,6 @@ func HasPathSumByIteration(root *TreeNode, sum int) bool {
 		curItem := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 
-		// fmt.Printf("curItem: %v, pathSum: %v\n", curItem.node.Val, curItem.pathSum)
 		if curItem.node.Left == nil && curItem.node.Right == nil && curItem.pathSum == sum {
 			return true
 		}
@@ -85,13 +84,14 @@ func HasPathSumByIteration(root *TreeNode, sum int) bool {
 	return false
 }
 
+// 难点: 回溯函数定义及参数选择, 终止递归条件的判断
 func PathSum(root *TreeNode, sum int) [][]any {
 	result := make([][]any, 0)
 	if root == nil {
 		return result
 	}
 
-	var traversal func(node *TreeNode, curSum int, path []any)
+	var traversal func(*TreeNode, int, []any)
 
 	traversal = func(node *TreeNode, count int, path []any) {
 		if node.Left == nil && node.Right == nil && count == 0 {

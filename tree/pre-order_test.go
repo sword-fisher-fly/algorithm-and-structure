@@ -43,6 +43,11 @@ func TestPreOrderStack(t *testing.T) {
 			if got := PreOrderStackII(treeII.root); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("PreOrderStackII() = %v, want %v", got, tt.want)
 			}
+
+			// treeIII := NewTreeFromArray(tt.arr)
+			// if got := PreOrderStackIII(treeIII.root); !reflect.DeepEqual(got, tt.want) {
+			// 	t.Errorf("PreOrderStackIII() = %v, want %v", got, tt.want)
+			// }
 		})
 	}
 }

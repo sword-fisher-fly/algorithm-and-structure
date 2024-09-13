@@ -1,9 +1,11 @@
 package tree
 
+import "fmt"
+
 // Create
 // Insert
 // Find
-// Delete
+// Delete // TODO
 
 type BSTree struct {
 	root *TreeNode
@@ -33,6 +35,50 @@ func NewBSTreeFromSortedArray(arr []any) *BSTree {
 	root := buildBSTreeFromSortedArray(arr, 0, len(arr)-1)
 
 	return &BSTree{root: root}
+}
+
+func NewBSTreeFromLevelArray(arr []any) *BSTree {
+	if len(arr) == 0 {
+		return &BSTree{root: nil}
+	}
+
+	treeNodeList := make([]*TreeNode, 0, len(arr))
+	// leftChild: 2*i rightChild: 2*i+1
+	for i := 0; i < len(arr); i++ {
+		if arr[i] == nil {
+			treeNodeList = append(treeNodeList, nil)
+			continue
+		}
+
+		treeNodeList = append(treeNodeList, NewTreeNode(arr[i]))
+	}
+
+	// debug
+	for i := range treeNodeList {
+		fmt.Printf("node[%d]=%v\n", i, treeNodeList[i])
+	}
+
+	for i := 0; i < len(arr)/2; i++ {
+		if treeNodeList[i] == nil {
+			continue
+		}
+
+		if 2*i+1 < len(arr) && treeNodeList[2*i+1] != nil {
+			treeNodeList[i].Left = treeNodeList[2*i+1]
+		}
+
+		if 2*i+2 < len(arr) && treeNodeList[2*i+2] != nil {
+			treeNodeList[i].Right = treeNodeList[2*i+2]
+		}
+	}
+
+	for i := range treeNodeList {
+		fmt.Printf("After building tree, node[%d]=%v\n", i, treeNodeList[i])
+	}
+
+	fmt.Printf("root: %v\n", treeNodeList[0].Val)
+
+	return &BSTree{root: treeNodeList[0]}
 }
 
 func NewBSTreeFromSortedArrayByIteration(arr []any) *BSTree {

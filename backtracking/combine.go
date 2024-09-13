@@ -31,6 +31,7 @@ func combineIIHelper(n, k int, startIndex int, path []int, result *[][]int) {
 		return
 	}
 
+	// 剪枝叶
 	for i := startIndex; i <= n-(k-len(path)); i++ {
 		path = append(path, i)
 		combineHelper(n, k, i+1, path, result)

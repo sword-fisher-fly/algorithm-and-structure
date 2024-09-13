@@ -37,6 +37,11 @@ func TestInOrderStack(t *testing.T) {
 			arr:  []any{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
 			want: []any{8, 4, 9, 2, 10, 5, 11, 1, 12, 6, 13, 3, 14, 7, 15},
 		},
+		{
+			name: "random tree",
+			arr:  level4RandomArr,
+			want: []any{5, 3, 2, 4, 1, 6},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

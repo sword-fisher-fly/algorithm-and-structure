@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -68,6 +69,74 @@ func TestIsValidBSTByIteration(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := IsValidBSTByIteration(tt.args.t.root); got != tt.want {
 				t.Errorf("IsValidBSTByIteration() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestFindMode(t *testing.T) {
+	type args struct {
+		t *BSTree
+	}
+	tests := []struct {
+		name string
+		args args
+		want []any
+	}{
+		{
+			//[1,2,3,4,5,5,6,7,8]
+			name: "one mode in binary search tree",
+			args: args{
+				t: NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 5, 6, 7, 8}),
+			},
+			want: []any{5},
+		},
+		{
+			name: "two modes in binary search tree",
+			args: args{
+				t: NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 4, 5, 5, 6, 7, 8}),
+			},
+			want: []any{4, 5},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindMode(tt.args.t.root); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindMode() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestFindModeByIteration(t *testing.T) {
+	type args struct {
+		t *BSTree
+	}
+	tests := []struct {
+		name string
+		args args
+		want any
+	}{
+		{
+			//[1,2,3,4,5,5,6,7,8]
+			name: "one mode in binary search tree",
+			args: args{
+				t: NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 5, 6, 7, 8}),
+			},
+			want: []any{5},
+		},
+		{
+			name: "two modes in binary search tree",
+			args: args{
+				t: NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 4, 5, 5, 6, 7, 8}),
+			},
+			want: []any{4, 5},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindModeByIteration(tt.args.t.root); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindModeByIteration() = %v, want %v", got, tt.want)
 			}
 		})
 	}

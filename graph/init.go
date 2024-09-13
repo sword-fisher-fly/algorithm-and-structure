@@ -9,6 +9,8 @@ var (
 	}
 )
 
+var directions [4][2]int
+
 var (
 	graphList5Vertex4Edge *GraphList
 )
@@ -16,4 +18,12 @@ var (
 func init() {
 	graphList5Vertex4Edge = NewGraphList()
 	graphList5Vertex4Edge.BuildGraphList(vertex5Vertex4Edge)
+
+	// (x, y) 右 -> 下 -> 左 -> 上
+	directions = [4][2]int{
+		{1, 0},
+		{0, -1},
+		{-1, 0},
+		{0, 1},
+	}
 }

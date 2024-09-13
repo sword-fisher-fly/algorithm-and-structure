@@ -35,3 +35,46 @@ func WorkBreak(s string, wordDict []string) bool {
 
 	return workBreakHelper(s, 0, wordMap, memo)
 }
+
+func WordBreakII(s string, words []string) bool {
+	if len(s) == 0 || len(words) == 0 {
+		return false
+	}
+
+	wordDict := make(map[string]struct{}, len(words))
+	for i := range words {
+		wordDict[words[i]] = struct{}{}
+	}
+
+	// 优化: 初始化为true, 表示s[0:i]可分割
+	memo := make([]bool, len(s)+1)
+	for i := range memo {
+		memo[i] = true
+	}
+
+	var backtracking func(s string, startIndex int, wordDict map[string]struct{}) bool
+	backtracking = func(s string, startIndex int, wordDict map[string]struct{}) bool {
+		if startIndex == len(s) {
+			return true
+		}
+
+		if !memo[startIndex] {
+			return false
+		}
+
+		for i := startIndex; i < len(s); i++ {
+			subStr := s[startIndex : i+1]
+			if _, ok := wordDict[subStr]; !ok {
+				continue
+			}
+
+			return backtracking(s, i+1, wordDict)
+		}
+
+		memo[startIndex] = false
+
+		return false
+	}
+
+	return backtracking(s, 0, wordDict)
+}

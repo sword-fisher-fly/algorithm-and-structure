@@ -17,7 +17,7 @@ func InOrderStack(root *TreeNode) []any {
 		for curNode != nil {
 			stackNode = append(stackNode, curNode)
 			curNode = curNode.Left
-		}
+		} // if-else结果的变种形式
 
 		curNode = stackNode[len(stackNode)-1]
 		stackNode = stackNode[:len(stackNode)-1]

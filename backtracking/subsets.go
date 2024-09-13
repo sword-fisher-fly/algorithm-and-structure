@@ -23,23 +23,22 @@ func Subsets(arr []int) [][]int {
 	return result
 }
 
-func subsetsWithDupHelper(arr []int, startIndex int, used *[]bool, path []int, result *[][]int) {
+func subsetsWithDupHelper(arr []int, startIndex int, used []bool, path []int, result *[][]int) {
 	tmp := make([]int, len(path))
 	copy(tmp, path)
 	*result = append(*result, tmp)
-	// if startIndex == len(arr) {
-	// 	return
-	// }
+	// here: 必须复制一份path的副本
+	// *result = append(*result, path)
 
 	for i := startIndex; i < len(arr); i++ {
-		if i > 0 && arr[i] == arr[i-1] && (*used)[i-1] == false {
+		if i > 0 && arr[i] == arr[i-1] && used[i-1] == false {
 			continue
 		}
 
-		(*used)[i] = true
+		used[i] = true
 		path = append(path, arr[i])
 		subsetsWithDupHelper(arr, i+1, used, path, result)
-		(*used)[i] = false
+		used[i] = false
 		path = path[:len(path)-1]
 	}
 }
@@ -48,7 +47,7 @@ func SubsetsWithDup(arr []int) [][]int {
 	path := []int{}
 	used := make([]bool, len(arr))
 
-	subsetsWithDupHelper(arr, 0, &used, path, &result)
+	subsetsWithDupHelper(arr, 0, used, path, &result)
 
 	return result
 }

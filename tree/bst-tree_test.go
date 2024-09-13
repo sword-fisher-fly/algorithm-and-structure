@@ -185,9 +185,6 @@ func TestBSTree_Search(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tr := NewBSTreeFromSortedArray(tt.args.arr)
 			got := tr.Search(tt.search)
-			// if got != nil {
-			// 	t.Logf("got: %v, but want: %v", got.Val, tt.want)
-			// }
 
 			if got != nil && !reflect.DeepEqual(got.Val, tt.want) || got == nil && tt.want != nil {
 				t.Errorf("failed to search %v from binary search tree", tt.search)
@@ -227,6 +224,37 @@ func TestBSTree_SearchByRecursive(t *testing.T) {
 			got := tr.SearchByRecursive(tt.search)
 			if got != nil && !reflect.DeepEqual(got.Val, tt.want) || got == nil && tt.want != nil {
 				t.Errorf("BSTree.SearchByRecursive() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNewBSTreeFromLevelArray(t *testing.T) {
+	type args struct {
+		arr []any
+	}
+	tests := []struct {
+		name        string
+		args        args
+		wantInOrder []any
+	}{
+		{
+			name:        "2-level full binary search tree traversed in a level way",
+			args:        args{arr: []any{2, 1, 3}},
+			wantInOrder: []any{1, 2, 3},
+		},
+		//[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+		{
+			name:        "any binary search tree traversed in a level way",
+			args:        args{arr: []any{4, 1, 6, 0, 2, 5, 7, nil, nil, nil, 3, nil, nil, nil, 8}},
+			wantInOrder: []any{0, 1, 2, 3, 4, 5, 6, 7, 8},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := NewBSTreeFromLevelArray(tt.args.arr)
+			if !reflect.DeepEqual(got.InOrder(), tt.wantInOrder) {
+				t.Errorf("NewBSTreeFromLevelArray() = %v, want %v", got, tt.wantInOrder)
 			}
 		})
 	}

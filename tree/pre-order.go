@@ -1,6 +1,7 @@
 package tree
 
 // root,left,right
+// right clild 位置可以放置在多处
 func PreOrderStack(root *TreeNode) []any {
 	var ret []any
 
@@ -48,3 +49,27 @@ func PreOrderStackII(root *TreeNode) []any {
 
 	return ret
 }
+
+// func PreOrderStackIII(root *TreeNode) []any {
+// 	var ret []any
+
+// 	curNode := root
+// 	stackNode := make([]*TreeNode, 0)
+
+// 	for curNode != nil || len(stackNode) > 0 {
+// 		for curNode != nil {
+// 			ret = append(ret, curNode.Val)
+// 			// if curNode.Right != nil {
+// 			// stackNode = append(stackNode, curNode.Right)
+// 			// }
+// 			curNode = curNode.Left
+// 		}
+
+// 		curNode = stackNode[len(stackNode)-1]
+// 		stackNode = stackNode[:len(stackNode)-1]
+
+// 		curNode = curNode.Right
+// 	}
+
+// 	return ret
+// }
