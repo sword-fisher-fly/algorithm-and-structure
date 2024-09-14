@@ -111,6 +111,27 @@ func InOrder(root *TreeNode, ret *[]any) {
 	InOrder(root.Right, ret)
 }
 
+func InOrderII(root *TreeNode) []any {
+	if root == nil {
+		return []any{}
+	}
+
+	res := []any{}
+	var inOrder func(*TreeNode)
+
+	inOrder = func(node *TreeNode) {
+		if node != nil {
+			inOrder(node.Left)
+			res = append(res, node.Val)
+			inOrder(node.Right)
+		}
+	}
+
+	inOrder(root)
+
+	return res
+}
+
 func PostOrder(root *TreeNode, ret *[]any) {
 	if root == nil {
 		return
@@ -121,26 +142,23 @@ func PostOrder(root *TreeNode, ret *[]any) {
 	*ret = append(*ret, root.Val)
 }
 
-// func (t *Tree) InOrder() []any {
-// 	var ret []any
+func PostOrderII(root *TreeNode) []any {
+	if root == nil {
+		return []any{}
+	}
 
-// 	for t.root != nil {
-// 		t.root = t.root.Left
-// 		ret = append(ret, t.root.Val)
-// 		t.root = t.root.Right
-// 	}
+	res := []any{}
+	var postOrder func(*TreeNode)
 
-// 	return ret
-// }
+	postOrder = func(node *TreeNode) {
+		if node != nil {
+			postOrder(node.Left)
+			postOrder(node.Right)
+			res = append(res, node.Val)
+		}
+	}
 
-// func (t *Tree) PostOrder() []any {
-// 	var ret []any
+	postOrder(root)
 
-// 	for t.root != nil {
-// 		t.root = t.root.Left
-// 		t.root = t.root.Right
-// 		ret = append(ret, t.root.Val)
-// 	}
-
-// 	return ret
-// }
+	return res
+}

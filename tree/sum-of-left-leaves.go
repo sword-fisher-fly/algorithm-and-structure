@@ -7,6 +7,7 @@ func SumOfLeftLeavesByRecursive(root *TreeNode) int {
 
 	leftSumValue := SumOfLeftLeavesByRecursive(root.Left)
 
+	// 如何理解, 在此处判断左叶子节点
 	leftValue := 0
 	if root.Left != nil && root.Left.Left == nil && root.Left.Right == nil {
 		leftValue = root.Left.Val.(int)
@@ -15,6 +16,23 @@ func SumOfLeftLeavesByRecursive(root *TreeNode) int {
 	rightSumValue := SumOfLeftLeavesByRecursive(root.Right)
 
 	return leftValue + leftSumValue + rightSumValue
+}
+
+func SumOfLeftLeavesByRecursiveSimple(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	leftSumValue := SumOfLeftLeavesByRecursive(root.Left)
+
+	// 如何理解, 在此处判断左叶子节点
+	if root.Left != nil && root.Left.Left == nil && root.Left.Right == nil {
+		leftSumValue = root.Left.Val.(int)
+	}
+
+	rightSumValue := SumOfLeftLeavesByRecursive(root.Right)
+
+	return leftSumValue + rightSumValue
 }
 
 func SumOfLeftLeavesByIteration(root *TreeNode) int {
