@@ -4,8 +4,13 @@ func PalindromePartition(s string) [][]string {
 	res := [][]string{}
 	path := []string{}
 
-	// 左闭合右闭合区间
+	// 左闭合右闭合区间 [start, end]
 	isPalindrome := func(s string, start, end int) bool {
+		// For guarding, it may never go through here.
+		if start > end {
+			return false
+		}
+
 		for i, j := start, end; i < j; i, j = i+1, j-1 {
 			if s[i] != s[j] {
 				return false

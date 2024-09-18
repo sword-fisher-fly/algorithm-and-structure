@@ -1,6 +1,9 @@
 package tree
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Create
 // Insert
@@ -53,11 +56,6 @@ func NewBSTreeFromLevelArray(arr []any) *BSTree {
 		treeNodeList = append(treeNodeList, NewTreeNode(arr[i]))
 	}
 
-	// debug
-	for i := range treeNodeList {
-		fmt.Printf("node[%d]=%v\n", i, treeNodeList[i])
-	}
-
 	for i := 0; i < len(arr)/2; i++ {
 		if treeNodeList[i] == nil {
 			continue
@@ -71,12 +69,6 @@ func NewBSTreeFromLevelArray(arr []any) *BSTree {
 			treeNodeList[i].Right = treeNodeList[2*i+2]
 		}
 	}
-
-	for i := range treeNodeList {
-		fmt.Printf("After building tree, node[%d]=%v\n", i, treeNodeList[i])
-	}
-
-	fmt.Printf("root: %v\n", treeNodeList[0].Val)
 
 	return &BSTree{root: treeNodeList[0]}
 }
@@ -127,6 +119,55 @@ func (t *BSTree) Empty() bool {
 
 func (t *BSTree) Root() *TreeNode {
 	return t.root
+}
+
+// Example:
+//
+//	 2
+//	/ \
+//
+// 1  3
+// Ouput:
+// 2 -> 1
+// 2 -> 3
+// 1 -> nil
+// 3 -> nil
+func (t *BSTree) PrettyPrint() {
+	if t.Empty() {
+		fmt.Println("Empty Tree")
+		return
+	}
+
+	res := strings.Builder{}
+	queue := []*TreeNode{t.root}
+	level := 1
+
+	for len(queue) > 0 {
+		levelSize := len(queue)
+		res.WriteString(fmt.Sprintf("------------  level %d   ------\n", level))
+		for i := 0; i < levelSize; i++ {
+			node := queue[0]
+			queue = queue[1:]
+
+			if node.Left != nil {
+				res.WriteString(fmt.Sprintf("%d-leftChild->%d\n", node.Val, node.Left.Val))
+				queue = append(queue, node.Left)
+			} else {
+				res.WriteString(fmt.Sprintf("%d-leftChild->nil\n", node.Val))
+
+			}
+
+			if node.Right != nil {
+				res.WriteString(fmt.Sprintf("%d-rightChild->%d\n", node.Val, node.Right.Val))
+				queue = append(queue, node.Right)
+			} else {
+				res.WriteString(fmt.Sprintf("%d-rightChild->nil\n", node.Val))
+			}
+		}
+		level++
+	}
+
+	fmt.Println(res.String())
 }
 
 func (t *BSTree) PreOrder() []any {
@@ -209,7 +250,110 @@ func (t *BSTree) InsertByRecursive(val any) {
 }
 
 func (t *BSTree) Delete(val any) {
+	var deleteNode func(root *TreeNode, val any) *TreeNode
+	deleteNode = func(root *TreeNode, val any) *TreeNode {
+		if root == nil {
+			return nil
+		}
 
+		// TODO: core logic
+		// 1) 左节点、右节点为空，直接删除
+		// 2）左节点为空，右节点不为空
+		// 3）左节点不为空，右节点为空
+		// 4）左节点不为空，右节点不为空
+		if val.(int) == root.Val.(int) {
+			if root.Left == nil && root.Right == nil {
+				return nil
+			} else if root.Left != nil && root.Right == nil {
+				return root.Left
+			} else if root.Left == nil && root.Right != nil {
+				return root.Right
+			} else {
+				// TODO: find the successor node
+				// 1) find the right node
+				// 2) find the left node
+				// 3) find the left node's right node
+				leftNode := root.Left
+				curNode := root.Right
+				for curNode.Left != nil {
+					curNode = curNode.Left
+				}
+
+				curNode.Left = leftNode
+				return root.Right
+			}
+		}
+
+		if root.Val.(int) < val.(int) {
+			root.Right = deleteNode(root.Right, val)
+		} else {
+			root.Left = deleteNode(root.Left, val)
+		}
+
+		return root
+	}
+
+	t.root = deleteNode(t.root, val)
+}
+
+func deleteNode(root *TreeNode, val any) *TreeNode {
+	if root == nil {
+		return root
+	}
+
+	// 删除某个节点
+	var deleteOneNode func(target *TreeNode) *TreeNode
+	deleteOneNode = func(target *TreeNode) *TreeNode {
+		if target == nil {
+			fmt.Println("target is nil")
+			return target
+		}
+
+		if target.Right == nil {
+			return target.Left
+		}
+
+		curNode := target.Right
+		for curNode.Left != nil {
+			curNode = curNode.Left
+		}
+
+		curNode.Left = target.Left
+		return target.Right
+	}
+
+	curNode := root
+	var preNode *TreeNode
+	for curNode != nil {
+		if curNode.Val.(int) == val.(int) {
+			break
+		}
+
+		preNode = curNode
+		if curNode.Val.(int) < val.(int) {
+			curNode = curNode.Right
+		} else {
+			curNode = curNode.Left
+		}
+	}
+
+	if preNode == nil {
+		return deleteOneNode(curNode)
+	}
+
+	if preNode.Left != nil && preNode.Left.Val.(int) == val.(int) {
+		preNode.Left = deleteOneNode(curNode)
+	}
+
+	if preNode.Right != nil && preNode.Right.Val.(int) == val.(int) {
+		preNode.Right = deleteOneNode(curNode)
+	}
+
+	return root
+}
+func (t *BSTree) DeleteByRecursive(val any) {
+	t.root = deleteNode(t.root, val)
+	return
 }
 
 func searchByRecursive(root *TreeNode, val any) *TreeNode {

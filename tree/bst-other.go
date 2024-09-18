@@ -101,9 +101,15 @@ func FindMode(root *TreeNode) []any {
 
 		traversal(node.Left)
 
-		if preNode == nil {
-			count = 1
-		} else if preNode.Val.(int) == node.Val.(int) {
+		// if preNode == nil {
+		// 	count = 1
+		// } else if preNode.Val.(int) == node.Val.(int) {
+		// 	count++
+		// } else {
+		// 	count = 1
+		// }
+		// 合并分支优化
+		if preNode != nil && preNode.Val.(int) == node.Val.(int) {
 			count++
 		} else {
 			count = 1
@@ -143,9 +149,15 @@ func FindModeByIteration(root *TreeNode) any {
 
 		curNode = stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		if preNode == nil {
-			count = 1
-		} else if preNode != nil && curNode.Val.(int) == preNode.Val.(int) {
+		// if preNode == nil {
+		// 	count = 1
+		// } else if preNode != nil && curNode.Val.(int) == preNode.Val.(int) {
+		// 	count++
+		// } else {
+		// 	count = 1
+		// }
+		// 合并优化
+		if preNode != nil && preNode.Val.(int) == curNode.Val.(int) {
 			count++
 		} else {
 			count = 1
@@ -165,4 +177,63 @@ func FindModeByIteration(root *TreeNode) any {
 	}
 
 	return result
+}
+
+// 1) root.Val < low
+// 2) low <= root.Val <= high
+// 3) root.Val > high
+// 只保留node节点值在[low, high]之间的TreeNode
+func TrimBSTreeByRecursive(root *TreeNode, low, high int) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	if root.Val.(int) < low {
+		return TrimBSTreeByRecursive(root.Right, low, high)
+	}
+
+	if root.Val.(int) > high {
+		return TrimBSTreeByRecursive(root.Left, low, high)
+	}
+
+	root.Left = TrimBSTreeByRecursive(root.Left, low, high)
+	root.Right = TrimBSTreeByRecursive(root.Right, low, high)
+
+	return root
+}
+
+func TrimBSTreeByIteration(root *TreeNode, low, high int) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	// 1) root.Val < low root.Val > high
+	for root != nil && (root.Val.(int) < low || root.Val.(int) > high) {
+		if root.Val.(int) < low {
+			root = root.Right
+		} else {
+			root = root.Left
+		}
+	}
+
+	// 2) low <= root.Val <= high
+	cur := root
+	for cur != nil {
+		for cur.Left != nil && cur.Left.Val.(int) < low {
+			cur.Left = cur.Left.Right
+		}
+
+		cur = cur.Left
+	}
+
+	cur = root
+	for cur != nil {
+		for cur.Right != nil && cur.Right.Val.(int) > high {
+			cur.Right = cur.Right.Left
+		}
+
+		cur = cur.Right
+	}
+
+	return root
 }

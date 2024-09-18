@@ -1,16 +1,15 @@
 package graph
 
-func dfs(g *Graph, x int64, n int64, result *[][]int64, path []int64) {
-	if x == n {
-		*result = append(*result, append(append([]int64{}, path...), n))
-		return
-	}
+func dfs(grid [][]int, visited [][]bool, x, y int) {
+	for _, d := range directions {
+		nextX, nextY := x+d[0], y+d[1]
+		if nextX < 0 || nextX >= len(grid) || nextY < 0 || nextY >= len(grid[0]) {
+			continue
+		}
 
-	if v, exist := g.Nodes[x]; exist {
-		for _, edge := range v.Edges {
-			path = append(path, x)
-			dfs(g, edge.EndNode.ID, n, result, path)
-			path = path[:len(path)-1]
+		if !visited[nextX][nextY] && grid[nextX][nextY] == 1 {
+			visited[nextX][nextY] = true
+			dfs(grid, visited, nextX, nextY)
 		}
 	}
 }

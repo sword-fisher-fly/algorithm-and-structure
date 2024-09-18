@@ -141,3 +141,101 @@ func TestFindModeByIteration(t *testing.T) {
 		})
 	}
 }
+
+func TestTrimBSTreeByRecursive(t *testing.T) {
+	type args struct {
+		t    *BSTree
+		low  int
+		high int
+	}
+	tests := []struct {
+		name        string
+		args        args
+		wantInOrder []any
+	}{
+		{
+			name: "the value of root node is less than low",
+			args: args{
+				t:    NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 6, 7, 8, 9}),
+				low:  5,
+				high: 7,
+			},
+			wantInOrder: []any{5, 6, 7},
+		},
+		{
+			name: "the value of root node is between low and high",
+			args: args{
+				t:    NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 6, 7, 8, 9}),
+				low:  4,
+				high: 7,
+			},
+			wantInOrder: []any{4, 5, 6, 7},
+		},
+
+		{
+			name: "the value of root node is greater than high",
+			args: args{
+				t:    NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 6, 7, 8, 9}),
+				low:  7,
+				high: 8,
+			},
+			wantInOrder: []any{7, 8},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := TrimBSTreeByRecursive(tt.args.t.root, tt.args.low, tt.args.high); !reflect.DeepEqual(InOrderII(got), tt.wantInOrder) {
+				t.Errorf("TrimBSTreeByRecursive() = %v, want %v", InOrderII(got), tt.wantInOrder)
+			}
+		})
+	}
+}
+
+func TestTrimBSTreeByIteration(t *testing.T) {
+	type args struct {
+		t    *BSTree
+		low  int
+		high int
+	}
+	tests := []struct {
+		name        string
+		args        args
+		wantInOrder []any
+	}{
+		{
+			name: "the value of root node is less than low",
+			args: args{
+				t:    NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 6, 7, 8, 9}),
+				low:  5,
+				high: 7,
+			},
+			wantInOrder: []any{5, 6, 7},
+		},
+		{
+			name: "the value of root node is between low and high",
+			args: args{
+				t:    NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 6, 7, 8, 9}),
+				low:  4,
+				high: 7,
+			},
+			wantInOrder: []any{4, 5, 6, 7},
+		},
+
+		{
+			name: "the value of root node is greater than high",
+			args: args{
+				t:    NewBSTreeFromSortedArray([]any{1, 2, 3, 4, 5, 6, 7, 8, 9}),
+				low:  7,
+				high: 8,
+			},
+			wantInOrder: []any{7, 8},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := TrimBSTreeByIteration(tt.args.t.root, tt.args.low, tt.args.high); !reflect.DeepEqual(InOrderII(got), tt.wantInOrder) {
+				t.Errorf("TrimBSTreeByIteration() = %v, want %v", InOrderII(got), tt.wantInOrder)
+			}
+		})
+	}
+}

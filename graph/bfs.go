@@ -1,6 +1,6 @@
 package graph
 
-func bfs(grid [][]byte, visited [][]bool, x, y int) {
+func bfs(grid [][]int, visited [][]bool, x, y int) {
 	var queue [][2]int
 	queue = append(queue, [2]int{x, y})
 	visited[x][y] = true
@@ -16,7 +16,7 @@ func bfs(grid [][]byte, visited [][]bool, x, y int) {
 				continue
 			}
 
-			if !visited[nextX][nextY] && grid[nextX][nextY] == '1' {
+			if !visited[nextX][nextY] && grid[nextX][nextY] == 1 {
 				queue = append(queue, [2]int{nextX, nextY})
 				visited[nextX][nextY] = true
 			}

@@ -42,8 +42,28 @@ func MinDepthByBFS(root *TreeNode) int {
 		levelSize := len(queue)
 		depth++
 
+		// 1)
+		// for i := 0; i < levelSize; i++ {
+		// 	curNode := queue[i]
+
+		// 	if curNode.Left == nil && curNode.Right == nil {
+		// 		return depth
+		// 	}
+
+		// 	if curNode.Left != nil {
+		// 		queue = append(queue, curNode.Left)
+		// 	}
+
+		// 	if curNode.Right != nil {
+		// 		queue = append(queue, curNode.Right)
+		// 	}
+		// }
+		// queue = queue[levelSize:]
+
+		// 2)
 		for i := 0; i < levelSize; i++ {
-			curNode := queue[i]
+			curNode := queue[0]
+			queue = queue[1:]
 
 			if curNode.Left == nil && curNode.Right == nil {
 				return depth

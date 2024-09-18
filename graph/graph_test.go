@@ -29,8 +29,12 @@ func TestGraphInitialize(t *testing.T) {
 	g := graphInitialize()
 
 	for id, node := range g.Nodes {
+		t.Logf("Vertex: %v", id)
+		if len(node.Edges) == 0 {
+			t.Log("    no edges")
+		}
 		for _, edge := range node.Edges {
-			t.Logf("node: %v, edge: %v-%v", id, edge.FromNode.ID, edge.EndNode.ID)
+			t.Logf("    edge: %v-%v", edge.FromNode.ID, edge.EndNode.ID)
 		}
 	}
 }
@@ -41,7 +45,7 @@ func TestGraphDFS(t *testing.T) {
 	var result [][]int64
 	var path []int64
 
-	dfs(g, 1, 4, &result, path)
+	TraversalGraphByDFS(g, 1, 4, &result, path)
 
 	for i, path := range result {
 		t.Logf("path %v: %v", i, path)

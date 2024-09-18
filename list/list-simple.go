@@ -22,6 +22,10 @@ func NewListFromArray(nums []int) *ListNode {
 }
 
 func ConcatenateList(head1, head2 *ListNode) *ListNode {
+	if head1 == nil {
+		return head2
+	}
+
 	cur := head1
 
 	for cur.Next != nil {
@@ -46,10 +50,6 @@ func ToArray(head *ListNode) []int {
 }
 
 func SwapPairs(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
-		return head
-	}
-
 	dummyHead := &ListNode{Next: head}
 
 	cur := dummyHead
@@ -81,6 +81,17 @@ func ReverseList(head *ListNode) *ListNode {
 	var pre *ListNode
 	cur := head
 
+	// 1 -> 2 -> 3 -> 4 -> nil
+	// loop 1
+	// 1) next = 2
+	// 2) 1 -> nil
+	// 3) pre = 1
+	// 4) cur = 2
+	// loop 2
+	// 1) next = 3
+	// 2) 2 -> 1
+	// 3) pre = 2
+	// 4) cur = 3
 	for cur != nil {
 		next := cur.Next
 		cur.Next = pre

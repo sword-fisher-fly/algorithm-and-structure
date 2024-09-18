@@ -55,3 +55,28 @@ func FindIslandsByBFS(grid [][]int) int {
 
 	return result
 }
+
+func FindIslandsByDFS(grid [][]int) int {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return 0
+	}
+
+	m, n := len(grid), len(grid[0])
+	visited := make([][]bool, m)
+	for i := range visited {
+		visited[i] = make([]bool, n)
+	}
+
+	var result int
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if !visited[i][j] && grid[i][j] == 1 {
+				visited[i][j] = true
+				dfs(grid, visited, i, j)
+				result++
+			}
+		}
+	}
+
+	return result
+}

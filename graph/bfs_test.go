@@ -5,17 +5,16 @@ import (
 	"testing"
 )
 
-func prettyPrintGrid(grid [][]byte) string {
+func prettyPrintGrid(visitedPath [][]bool) string {
 	var sb strings.Builder
-	for _, row := range grid {
-		for _, col := range row {
-			if col != 0 {
-				sb.WriteByte(col)
+	for i := 0; i < len(visitedPath); i++ {
+		for j := 0; j < len(visitedPath[0]); j++ {
+			if visitedPath[i][j] {
+				sb.WriteByte('1')
 			} else {
 				sb.WriteByte(' ')
 			}
 		}
-
 		sb.WriteByte('\n')
 	}
 
@@ -24,7 +23,7 @@ func prettyPrintGrid(grid [][]byte) string {
 
 func Test_bfs(t *testing.T) {
 	type args struct {
-		grid    [][]byte
+		grid    [][]int
 		visited [][]bool
 		x       int
 		y       int
@@ -32,16 +31,16 @@ func Test_bfs(t *testing.T) {
 	tests := []struct {
 		name        string
 		args        args
-		wantVisited [][]byte
+		wantVisited [][]int
 	}{
 		{
 			name: "4*4 grid from the top left corner to the bottom right corner",
 			args: args{
-				grid: [][]byte{
-					{'1', '1', '0', '0'},
-					{'0', '1', '0', '0'},
-					{'1', '1', '1', '0'},
-					{'1', '0', '1', '1'},
+				grid: [][]int{
+					{1, 1, 0, 0},
+					{0, 1, 0, 0},
+					{1, 1, 1, 0},
+					{1, 0, 1, 1},
 				},
 				visited: [][]bool{
 					{false, false, false, false},
@@ -52,32 +51,23 @@ func Test_bfs(t *testing.T) {
 				x: 0,
 				y: 0,
 			},
-			wantVisited: [][]byte{
-				{'1', '1', 0, 0},
-				{0, '1', 0, 0},
-				{0, '1', '1', 0},
-				{0, 0, '1', '1'},
+			wantVisited: [][]int{
+				{1, 1, 0, 0},
+				{0, 1, 0, 0},
+				{0, 1, 1, 0},
+				{0, 0, 1, 1},
 			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			tt.args.visited[tt.args.x][tt.args.y] = true
+
 			bfs(tt.args.grid, tt.args.visited, tt.args.x, tt.args.y)
 
-			visitedPath := make([][]byte, len(tt.args.visited))
-			for i := range visitedPath {
-				visitedPath[i] = make([]byte, len(tt.args.visited[i]))
-			}
+			t.Logf("visited: %v", tt.args.visited)
 
-			for i := 0; i < len(tt.args.visited); i++ {
-				for j := 0; j < len(tt.args.visited[i]); j++ {
-					if tt.args.visited[i][j] {
-						visitedPath[i][j] = '1'
-					}
-				}
-			}
-
-			t.Logf("visitedPath: \n%s", prettyPrintGrid(visitedPath))
+			t.Logf("visitedPath: \n%s", prettyPrintGrid(tt.args.visited))
 
 			// 有些额外的相邻点也被访问过, 是否可以剔除?
 			// if !reflect.DeepEqual(tt.wantVisited, visitedPath) {
