@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestSearchWordInBoard(t *testing.T) {
+func TestSearchWordInBoardByBFS(t *testing.T) {
 	type args struct {
 		board [][]byte
 		word  string

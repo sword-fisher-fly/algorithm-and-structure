@@ -65,7 +65,7 @@ func Test_bfs(t *testing.T) {
 
 			bfs(tt.args.grid, tt.args.visited, tt.args.x, tt.args.y)
 
-			t.Logf("visited: %v", tt.args.visited)
+			// t.Logf("visited: %v", tt.args.visited)
 
 			t.Logf("visitedPath: \n%s", prettyPrintGrid(tt.args.visited))
 

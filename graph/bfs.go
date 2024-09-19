@@ -12,14 +12,14 @@ func bfs(grid [][]int, visited [][]bool, x, y int) {
 
 		for _, d := range directions {
 			nextX, nextY := curX+d[0], curY+d[1]
-			if nextX < 0 || nextX >= len(grid) || nextY < 0 || nextY >= len(grid[0]) {
+			if nextX < 0 || nextX >= len(grid) || nextY < 0 || nextY >= len(grid[0]) || grid[nextX][nextY] == 0 || visited[nextX][nextY] {
 				continue
 			}
 
-			if !visited[nextX][nextY] && grid[nextX][nextY] == 1 {
-				queue = append(queue, [2]int{nextX, nextY})
-				visited[nextX][nextY] = true
-			}
+			// if !visited[nextX][nextY] && grid[nextX][nextY] == 1 {
+			queue = append(queue, [2]int{nextX, nextY})
+			visited[nextX][nextY] = true
+			// }
 		}
 	}
 }

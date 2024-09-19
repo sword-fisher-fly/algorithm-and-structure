@@ -38,14 +38,14 @@ func TopologicalSort(n int64, edges [][2]int64) []int64 {
 		queue = queue[1:]
 		result = append(result, curVertex)
 		curNexts := umap[curVertex]
-		if len(curNexts) > 0 {
-			for i := 0; i < len(curNexts); i++ {
-				inDegree[curNexts[i]]--
-				if inDegree[curNexts[i]] == 0 {
-					queue = append(queue, curNexts[i])
-				}
+		// if len(curNexts) > 0 {
+		for i := 0; i < len(curNexts); i++ {
+			inDegree[curNexts[i]]--
+			if inDegree[curNexts[i]] == 0 {
+				queue = append(queue, curNexts[i])
 			}
 		}
+		// }
 	}
 
 	return result
@@ -65,7 +65,11 @@ func TopologicalSortFromGraphList(graph *GraphList) []int64 {
 
 	for _, vv := range umap {
 		for _, v := range vv {
+			// if _, ok := inDegree[v]; !ok {
+			// 	inDegree[v] = 1
+			// } else {
 			inDegree[v]++
+			// }
 		}
 	}
 
@@ -82,14 +86,14 @@ func TopologicalSortFromGraphList(graph *GraphList) []int64 {
 		queue = queue[1:]
 		result = append(result, curVertex)
 		curNexts := umap[curVertex]
-		if len(curNexts) > 0 {
-			for i := 0; i < len(curNexts); i++ {
-				inDegree[curNexts[i]]--
-				if inDegree[curNexts[i]] == 0 {
-					queue = append(queue, curNexts[i])
-				}
+		// if len(curNexts) > 0 {
+		for i := 0; i < len(curNexts); i++ {
+			inDegree[curNexts[i]]--
+			if inDegree[curNexts[i]] == 0 {
+				queue = append(queue, curNexts[i])
 			}
 		}
+		// }
 	}
 
 	return result

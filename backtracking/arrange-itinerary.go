@@ -13,14 +13,11 @@ func FindItinerary(startSite string, tickets [][2]string) []string {
 	targets := make(map[string]map[string]int)
 	for _, t := range tickets {
 		from, to := t[0], t[1]
-		// fmt.Printf("From: %s, To: %s\n", from, to)
 		if _, ok := targets[from]; !ok {
 			targets[from] = make(map[string]int)
 		}
 		targets[from][to]++
 	}
-
-	// fmt.Printf("targets: %v\n", targets)
 
 	var backtracking func(tickNums int) bool
 	backtracking = func(tickNums int) bool {

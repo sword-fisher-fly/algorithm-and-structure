@@ -49,22 +49,22 @@ func SearchWordInBoardByBFS(board [][]byte, word string) bool {
 
 			for _, dir := range directions {
 				nextX, nextY := curX+dir[0], curY+dir[1]
-				if nextX < 0 || nextX >= m || nextY < 0 || nextY >= n || board[nextX][nextY] != word[wordIndex] {
+				if nextX < 0 || nextX >= m || nextY < 0 || nextY >= n || visited[nextX][nextY] || board[nextX][nextY] != word[wordIndex] {
 					continue
 				}
 
-				if board[nextX][nextY] == word[wordIndex] && !visited[nextX][nextY] {
-					wordIndex++
-					if wordIndex == len(word) {
-						visited[nextX][nextY] = true
-						fmt.Printf("mark the path:\n%s\n", colorPathInBoard(board, visited))
-						return true
-					}
-
-					queue = append(queue, [2]int{nextX, nextY})
+				// if board[nextX][nextY] == word[wordIndex] && !visited[nextX][nextY] {
+				wordIndex++
+				if wordIndex == len(word) {
 					visited[nextX][nextY] = true
-					break // important here, otherwise it will fail.
+					fmt.Printf("mark the path:\n%s\n", colorPathInBoard(board, visited))
+					return true
 				}
+
+				queue = append(queue, [2]int{nextX, nextY})
+				visited[nextX][nextY] = true
+				break // important here, otherwise it will fail.
+				// }
 			}
 		}
 
