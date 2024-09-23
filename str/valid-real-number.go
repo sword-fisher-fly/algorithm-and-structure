@@ -1,6 +1,9 @@
 package str
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // 1)  0
 // 2) +0
@@ -9,7 +12,7 @@ import "strings"
 // 5) -1.0
 // 6) +1.0
 func isValidRealNumber(s string) bool {
-	if len(s) < 1 {
+	if len(s) == 0 {
 		return false
 	}
 
@@ -21,6 +24,7 @@ func isValidRealNumber(s string) bool {
 	}
 
 	if hasDot {
+		fmt.Printf("integer part: %s, decimal part: %s\n", fields[0], fields[1])
 		return isValidInterger(fields[0]) && isValidIntergerAfterDot(fields[1])
 	}
 

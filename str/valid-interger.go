@@ -20,6 +20,10 @@ package str
 // 18) +1.      false
 // 19) +1.01E+3 true
 
+func isDigit(c byte) bool {
+	return c >= '0' && c <= '9'
+}
+
 func isNonZeroInterger(s string) bool {
 	hasSign := false
 
@@ -41,7 +45,7 @@ func isNonZeroInterger(s string) bool {
 		}
 
 		for i := 1; i < len(s); i++ {
-			if s[i] < '0' || s[i] > '9' {
+			if !isDigit(s[i]) {
 				return false
 			}
 		}
@@ -61,12 +65,12 @@ func isNonZeroInterger(s string) bool {
 }
 
 func isValidIntergerAfterDot(s string) bool {
-	if len(s) < 1 {
+	if len(s) == 0 {
 		return false
 	}
 
 	for i := range s {
-		if s[i] < '0' || s[i] > '9' {
+		if !isDigit(s[i]) {
 			return false
 		}
 	}
@@ -77,7 +81,7 @@ func isValidIntergerAfterDot(s string) bool {
 func isValidInterger(s string) bool {
 	hasSign := false
 
-	if len(s) < 1 {
+	if len(s) == 0 {
 		return false
 	}
 
@@ -95,7 +99,7 @@ func isValidInterger(s string) bool {
 		}
 
 		for i := 1; i < len(s); i++ {
-			if s[i] < '0' || s[i] > '9' {
+			if !isDigit(s[i]) {
 				return false
 			}
 		}
@@ -105,7 +109,7 @@ func isValidInterger(s string) bool {
 		}
 
 		for i := 0; i < len(s); i++ {
-			if s[i] < '0' || s[i] > '9' {
+			if !isDigit(s[i]) {
 				return false
 			}
 		}
