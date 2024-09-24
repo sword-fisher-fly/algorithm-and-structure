@@ -41,9 +41,9 @@ func WordBreakII(s string, words []string) bool {
 		return false
 	}
 
-	wordDict := make(map[string]struct{}, len(words))
+	wordDict := make(map[string]bool, len(words))
 	for i := range words {
-		wordDict[words[i]] = struct{}{}
+		wordDict[words[i]] = true
 	}
 
 	// 优化: 初始化为true, 表示s[0:i]可分割
@@ -52,8 +52,8 @@ func WordBreakII(s string, words []string) bool {
 		memo[i] = true
 	}
 
-	var backtracking func(s string, startIndex int, wordDict map[string]struct{}) bool
-	backtracking = func(s string, startIndex int, wordDict map[string]struct{}) bool {
+	var backtracking func(s string, startIndex int) bool
+	backtracking = func(s string, startIndex int) bool {
 		if startIndex == len(s) {
 			return true
 		}
@@ -63,12 +63,7 @@ func WordBreakII(s string, words []string) bool {
 		}
 
 		for i := startIndex; i < len(s); i++ {
-			subStr := s[startIndex : i+1]
-			if _, ok := wordDict[subStr]; !ok {
-				continue
-			}
-
-			return backtracking(s, i+1, wordDict)
+			return wordDict[s[startIndex:i+1]] && backtracking(s, i+1)
 		}
 
 		memo[startIndex] = false
@@ -76,5 +71,5 @@ func WordBreakII(s string, words []string) bool {
 		return false
 	}
 
-	return backtracking(s, 0, wordDict)
+	return backtracking(s, 0)
 }

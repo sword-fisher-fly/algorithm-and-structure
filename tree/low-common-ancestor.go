@@ -19,19 +19,19 @@ func LowestCommonAncestorInBSTByRecursive(root, p, q *TreeNode) *TreeNode {
 	return root
 }
 
-func LowestCommonAncestorInBSTByIteration(root, p, q *TreeNode) *TreeNode {
-	for root != nil {
-		if root.Val.(int) < p.Val.(int) && root.Val.(int) < p.Val.(int) {
-			root = root.Right
-		} else if root.Val.(int) > p.Val.(int) && root.Val.(int) > q.Val.(int) {
-			root = root.Left
-		} else {
-			return root
-		}
-	}
+// func LowestCommonAncestorInBSTByIteration(root, p, q *TreeNode) *TreeNode {
+// 	for root != nil {
+// 		if root.Val.(int) < p.Val.(int) && root.Val.(int) < p.Val.(int) {
+// 			root = root.Right
+// 		} else if root.Val.(int) > p.Val.(int) && root.Val.(int) > q.Val.(int) {
+// 			root = root.Left
+// 		} else {
+// 			return root
+// 		}
+// 	}
 
-	return root
-}
+// 	return root
+// }
 
 // 普通二叉树, 从底向上回溯
 // 前提: 假设p、q在二叉树存在

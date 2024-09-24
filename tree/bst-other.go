@@ -237,3 +237,51 @@ func TrimBSTreeByIteration(root *TreeNode, low, high int) *TreeNode {
 
 	return root
 }
+
+// dp[i]: 以i为root节点的二叉搜索树总数
+// for j in loop(1..i-1)
+// dp[i] = dp[0]*dp[i-1] + dp[1]*dp[i-2]  ... + dp[i-1]*dp[0]
+func GenerateBSTreeCount(n int) int {
+	dp := make([]int, n+1)
+	dp[0] = 1
+	dp[1] = 1
+	for i := 2; i <= n; i++ {
+		for j := 0; j < i; j++ {
+			dp[i] += dp[j] * dp[i-j-1]
+		}
+	}
+
+	return dp[n]
+}
+
+func GenerateBSTree(n int) []*TreeNode {
+	if n == 0 {
+		return []*TreeNode{}
+	}
+
+	var generateBSTreeBetween func(start, end int) []*TreeNode
+
+	generateBSTreeBetween = func(start, end int) []*TreeNode {
+		res := []*TreeNode{}
+
+		if start > end {
+			return []*TreeNode{nil}
+		}
+
+		for i := start; i <= end; i++ {
+			left := generateBSTreeBetween(start, i-1)
+			right := generateBSTreeBetween(i+1, end)
+			for l := 0; l < len(left); l++ {
+				for r := 0; r < len(right); r++ {
+					root := &TreeNode{Val: i, Left: left[l], Right: right[r]}
+					// root.Left, root.Right = left[l], right[r]
+					res = append(res, root)
+				}
+			}
+		}
+		return res
+
+	}
+
+	return generateBSTreeBetween(1, n)
+}

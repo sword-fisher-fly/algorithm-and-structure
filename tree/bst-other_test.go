@@ -239,3 +239,60 @@ func TestTrimBSTreeByIteration(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerateBSTree(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []*TreeNode
+	}{
+		{
+			name: "only one node",
+			args: args{n: 1},
+			//
+		},
+		{
+			name: "three node",
+			args: args{n: 3},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := GenerateBSTree(tt.args.n)
+
+			for i := range got {
+				t.Logf("Level traversal order: %v", LevelTraversal(got[i]))
+			}
+			//  !reflect.DeepEqual(got, tt.want) {
+			// 	t.Errorf("GenerateBSTree() = %v, want %v", got, tt.want)
+			// }
+		})
+	}
+}
+
+func TestGenerateBSTreeCount(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "3 nodes in a tree",
+			args: args{n: 3},
+			want: 5,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := GenerateBSTreeCount(tt.args.n); got != tt.want {
+				t.Errorf("GenerateBSTreeCount() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
