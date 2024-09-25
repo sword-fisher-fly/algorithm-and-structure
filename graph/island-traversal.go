@@ -37,8 +37,9 @@ func FindIslandsByBFS(grid [][]int) int {
 				}
 
 				// if !visited[nextX][nextY] {
-				queue = append(queue, [2]int{nextX, nextY})
 				visited[nextX][nextY] = true
+				queue = append(queue, [2]int{nextX, nextY})
+				// visited[nextX][nextY] = true
 				// }
 			}
 		}

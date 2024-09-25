@@ -1,6 +1,9 @@
 package backtracking
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // [start, end]
 func isValidNum(s string, start, end int) bool {
@@ -40,8 +43,11 @@ func restoreIPAddressHelper(s string, startIndex int, pointNum int, path []strin
 
 	for i := startIndex; i < len(s); i++ {
 		if !isValidNum(s, startIndex, i) {
-			break
+			break // ok too??
+			// continue // ok
 		}
+
+		fmt.Printf("startIndex=%d, i+1=%d\n", startIndex, i+1)
 
 		path = append(path, s[startIndex:i+1])
 		restoreIPAddressHelper(s, i+1, pointNum+1, path, result)

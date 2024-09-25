@@ -29,7 +29,7 @@ func NewGraphMatrix(n int64) *GraphMatrix {
 }
 
 func (g *GraphMatrix) AddEdge(startPoint, endPoint int64) {
-	if startPoint < 0 || startPoint > int64(g.n) || endPoint < 0 || endPoint > int64(g.n) {
+	if startPoint < 1 || startPoint > int64(g.n) || endPoint < 1 || endPoint > int64(g.n) {
 		return
 	}
 
@@ -52,6 +52,7 @@ func (g *GraphMatrix) DFS(x, n int) [][]int {
 				minLen = len(tmp)
 			}
 			res = append(res, tmp)
+
 			return
 		}
 

@@ -14,13 +14,14 @@ func serializeTreeNodeList(bi *TreeNode) []any {
 
 	return res
 }
-func Convert2BiNode(root *TreeNode) *TreeNode {
-	if root == nil {
+func Convert2BiNode(t *TreeNode) *TreeNode {
+	if t == nil {
 		return nil
 	}
 
-	dummyNode := &TreeNode{Right: root}
+	dummyNode := &TreeNode{Right: t}
 	preNode := dummyNode
+	// fmt.Printf("Initialize preNode=%v\n", preNode.Val)
 
 	var dfs func(*TreeNode)
 	dfs = func(root *TreeNode) {
@@ -29,6 +30,7 @@ func Convert2BiNode(root *TreeNode) *TreeNode {
 		}
 
 		dfs(root.Left)
+		// fmt.Printf("preNode=%v\n", preNode.Val)
 		preNode.Right = root
 		root.Left = nil
 		preNode = root

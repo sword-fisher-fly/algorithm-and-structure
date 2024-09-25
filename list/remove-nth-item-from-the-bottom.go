@@ -5,7 +5,7 @@ func RemoveNthItemFromTheBottomII(head *ListNode, n int) *ListNode {
 
 	slow, fast := dummyHead, dummyHead
 
-	// 1 -> 2 -> 3 -> 4 -> 5
+	// 1 -> 2 -> 3 -> 4 -> 5 -> nil
 	// n: 1
 	// fastNode: 1
 	for i := 0; i < n && fast != nil; i++ {

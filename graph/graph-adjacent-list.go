@@ -44,6 +44,7 @@ func (g *GraphList) DFS(x, n int64) [][]int64 {
 	path = append(path, x)
 
 	minLen := 0
+
 	var dfs func(x, n int64)
 	dfs = func(x, n int64) {
 		if x == n {
@@ -75,7 +76,6 @@ func (g *GraphList) PrettyPrintGraphList() string {
 	res := strings.Builder{}
 
 	for _, v := range g.GetVertex() {
-		// res.WriteString(fmt.Sprintf("%d -> ", v))
 		for _, e := range g.Edges[v] {
 			res.WriteString(fmt.Sprintf("%d->%d\n", v, e))
 		}
