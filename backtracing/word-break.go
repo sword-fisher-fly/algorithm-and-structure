@@ -63,6 +63,10 @@ func WordBreakII(s string, words []string) bool {
 		}
 
 		for i := startIndex; i < len(s); i++ {
+			if _, ok := wordDict[s[startIndex:i+1]]; !ok {
+				continue
+			}
+			
 			return wordDict[s[startIndex:i+1]] && backtracking(s, i+1)
 		}
 

@@ -1,7 +1,6 @@
 package backtracking
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -46,8 +45,6 @@ func restoreIPAddressHelper(s string, startIndex int, pointNum int, path []strin
 			break // ok too??
 			// continue // ok
 		}
-
-		fmt.Printf("startIndex=%d, i+1=%d\n", startIndex, i+1)
 
 		path = append(path, s[startIndex:i+1])
 		restoreIPAddressHelper(s, i+1, pointNum+1, path, result)

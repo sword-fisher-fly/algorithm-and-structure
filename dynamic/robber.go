@@ -1,6 +1,6 @@
 package dynamic
 
-import "example/alg-structure/tree"
+import "github.com/sword-fisher-fly/algorithm-and-structure/tree"
 
 // 1）有一排房子，每间房子都有一定现金，如偷相邻两个房屋则触发告警，
 // 求在不触动警报的情况下，能够偷窃到的最高金额

@@ -1,7 +1,5 @@
 package greedy
 
-import "fmt"
-
 func LongestContinuousAscendingSubSequence(arr []int) int {
 	cnt := 1
 	result := 1
@@ -12,8 +10,6 @@ func LongestContinuousAscendingSubSequence(arr []int) int {
 		} else {
 			cnt = 1
 		}
-
-		fmt.Printf("cnt=%d, arr[%d]=%d\n", cnt, i, arr[i])
 
 		result = max(result, cnt)
 	}

@@ -1,8 +1,9 @@
 package dynamic
 
 import (
-	"example/alg-structure/tree"
 	"testing"
+
+	"github.com/sword-fisher-fly/algorithm-and-structure/tree"
 )
 
 func TestRobberHouseOnLine(t *testing.T) {

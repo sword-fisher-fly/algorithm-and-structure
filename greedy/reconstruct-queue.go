@@ -1,7 +1,6 @@
 package greedy
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -32,7 +31,6 @@ func ReconstructQueue(peoples [][2]int) [][2]int {
 	res := [][2]int{}
 
 	sort.Sort(People(peoples))
-	fmt.Printf("Sorted people: %v\n", peoples)
 
 	res = append(res, peoples[0])
 
@@ -42,8 +40,6 @@ func ReconstructQueue(peoples [][2]int) [][2]int {
 		for k := 0; k < pos; k++ {
 			startIndex++
 		}
-
-		fmt.Printf("startIndex=%d, res=%v\n", startIndex, res)
 
 		if startIndex == 0 {
 			res = append([][2]int{peoples[i]}, res...)
@@ -65,7 +61,6 @@ func ReconstructQueueII(peoples [][2]int) [][2]int {
 	res := make([][2]int, len(peoples))
 
 	sort.Sort(People(peoples))
-	// fmt.Printf("Sorted people: %v\n", peoples)
 
 	res[0] = peoples[0]
 
@@ -75,8 +70,6 @@ func ReconstructQueueII(peoples [][2]int) [][2]int {
 		for k := 0; k < pos; k++ {
 			startIndex++
 		}
-
-		// fmt.Printf("startIndex=%d, res=%v\n", startIndex, res)
 
 		if startIndex == i {
 			res[startIndex] = peoples[i]
