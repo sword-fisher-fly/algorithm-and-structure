@@ -39,25 +39,5 @@ func CleanPath(path string) string {
 		part += string(path[i])
 	}
 
-	// b := bytes.Buffer{}
 	return "/" + strings.Join(stack, "/")
 }
-
-// 遇到..如何回退??
-// func CleanPathII(path string) string {
-// 	result := strings.Builder{}
-
-// 	for i := 0; i < len(path); i++ {
-// 		if path[i] == '/' {
-// 			if result.Len() == 0 || result.Len() > 0 && result.String()[result.Len()-1] != '/' {
-// 				result.WriteByte('/')
-// 			}
-
-// 			continue
-// 		}
-
-// 		if i+1 < len(path) && path[i:i+2] == ".." {
-// 		}
-
-// 	}
-// }

@@ -10,7 +10,6 @@ const (
 	MultiplyDividePriority
 )
 
-// func isDigit()
 func isOperator(c byte) bool {
 	switch c {
 	case '-', '+', '*', '/', '%':
@@ -80,8 +79,6 @@ func EvalExpr(input string) int {
 			newOp := string(prev)
 			addNewOperator(newOp)
 			prev = 0
-
-			// fmt.Printf("Add new operato: %v into the stack: %v\n", newOp, operatorStack)
 		}
 
 		if isDigit(input[i]) { // refactor here to use for-loop
@@ -216,7 +213,6 @@ func EvalExprII(input string) int {
 		i++
 	}
 
-	fmt.Printf("len(operatorStack)=%d, len(operandStack)=%d\n", len(operatorStack), len(operandStack))
 	for len(operatorStack) > 0 {
 		popAndCalculateFromOperandStackAndOperatorStack()
 	}

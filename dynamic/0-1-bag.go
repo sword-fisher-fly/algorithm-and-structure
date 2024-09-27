@@ -46,7 +46,7 @@ func MaxValueForBagII(weights []int, values []int, bagWeight int) int {
 	for j := weights[0]; j <= bagWeight; j++ {
 		dp[0][j] = values[0]
 	}
-	for j := 0; j <= bagWeight; j++ {  // 背包
+	for j := 0; j <= bagWeight; j++ { // 背包
 		for i := 1; i < len(weights); i++ { // 物品
 			if j < weights[i] {
 				dp[i][j] = dp[i-1][j]
@@ -66,8 +66,8 @@ func MaxValueForBagIII(weights []int, values []int, bagWeight int) int {
 
 	dp := make([]int, bagWeight+1)
 
-	for i := 0; i < len(weights); i++ {
-		for j := bagWeight; j >= weights[i]; j-- {
+	for i := 0; i < len(weights); i++ { // 物品
+		for j := bagWeight; j >= weights[i]; j-- { //背包
 			dp[j] = max(dp[j], dp[j-weights[i]]+values[i])
 		}
 	}

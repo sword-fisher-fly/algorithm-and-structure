@@ -98,7 +98,6 @@ func MinEditDistance(word1, word2 string) int {
 
 	for i := 1; i <= len(word1); i++ {
 		for j := 1; j <= len(word2); j++ {
-			// fmt.Printf("i=%d, j=%d\n", i, j)
 			if word1[i-1] == word2[j-1] {
 				dp[i][j] = dp[i-1][j-1]
 			} else {
@@ -106,8 +105,6 @@ func MinEditDistance(word1, word2 string) int {
 			}
 		}
 	}
-
-	// fmt.Printf("word1=%s, word2=%s, dp=%v\n", word1, word2, dp)
 
 	return dp[len(word1)][len(word2)]
 }

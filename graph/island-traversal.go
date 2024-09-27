@@ -1,6 +1,5 @@
 package graph
 
-// TODO:
 // 1: 陆地 0: 水域
 // 输出: 计算岛屿的数量
 // 说明: 岛屿由水平方向和垂直方向上相邻陆地连接而成,并且四周都是水域
@@ -69,6 +68,20 @@ func FindIslandsByDFS(grid [][]int) int {
 	}
 
 	var result int
+	var dfs func([][]int, [][]bool, int, int)
+
+	dfs = func(grid [][]int, visited [][]bool, x, y int) {
+		for _, d := range directions {
+			nextX, nextY := x+d[0], y+d[1]
+			if nextX < 0 || nextX >= m || nextY < 0 || nextY >= n || visited[nextX][nextY] || grid[nextX][nextY] == 0 {
+				continue
+			}
+
+			visited[nextX][nextY] = true
+			dfs(grid, visited, nextX, nextY)
+		}
+	}
+
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
 			if !visited[i][j] && grid[i][j] == 1 {

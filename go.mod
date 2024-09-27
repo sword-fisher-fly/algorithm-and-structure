@@ -1,3 +1,3 @@
-module example/alg-structure
+module github.com/sword-fisher-fly/algorithm-and-structure
 
-go 1.22.2
+go 1.22.0

@@ -21,13 +21,13 @@ func InvertTreeByDFS(root *TreeNode) {
 	for len(stack) > 0 {
 		curNode := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		curNode.Left, curNode.Right = curNode.Right, curNode.Left
+		curNode.Left, curNode.Right = curNode.Right, curNode.Left // root
 
-		if curNode.Right != nil {
+		if curNode.Right != nil { // right
 			stack = append(stack, curNode.Right)
 		}
 
-		if curNode.Left != nil {
+		if curNode.Left != nil { // left
 			stack = append(stack, curNode.Left)
 		}
 	}
@@ -48,11 +48,11 @@ func InvertTreeByBFS(root *TreeNode) {
 			stack = stack[:len(stack)-1]
 			curNode.Left, curNode.Right = curNode.Right, curNode.Left
 			if curNode.Right != nil {
-				stack = append(stack, curNode.Left)
+				stack = append(stack, curNode.Right)
 			}
 
 			if curNode.Left != nil {
-				stack = append(stack, curNode.Right)
+				stack = append(stack, curNode.Left)
 			}
 		}
 	}

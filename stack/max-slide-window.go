@@ -11,7 +11,8 @@ func NewMaxSlideWindowQueue() *MaxSlideWindowQueue {
 }
 
 func (s *MaxSlideWindowQueue) Push(x int) {
-	for len(s.Queue) > 0 && x >= s.Queue[len(s.Queue)-1] {
+	// 相等也需要压到栈, 否则随着滑动窗口移动最大值会被出栈而丢失
+	for len(s.Queue) > 0 && x > s.Queue[len(s.Queue)-1] {
 		s.Queue = s.Queue[:len(s.Queue)-1]
 	}
 
@@ -25,7 +26,6 @@ func (s *MaxSlideWindowQueue) Pop(x int) {
 }
 
 // 滑动窗口包含k个元素, 依次从左至右在数组上滑动, 求滑动窗口里的最大值
-// 
 func MaxInSlideWindow(arr []int, k int) []int {
 	if len(arr) < k {
 		return []int{}

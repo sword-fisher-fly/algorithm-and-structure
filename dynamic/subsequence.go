@@ -12,6 +12,8 @@ package dynamic
 
 // 1) 最大上升递增子序列
 // dp[i]: 以i结尾的最长上升子序列的长度
+
+// The same with `LongestAscendingSubSequence` implemented in longest-ascending-sub-sequence.go
 func MaxLengthOfIncreasingSubSequence(nums []int) int {
 	result := 1
 
@@ -36,6 +38,7 @@ func MaxLengthOfIncreasingSubSequence(nums []int) int {
 //  Output：[3,2,1]
 
 // dp[i][j]: nums1[:i]和nums2[:j]的最长重复子数组的长度
+// the same with `MaxSubPalindrome` defined in max-common-sub-array.go
 func MaxRepeatedSubArray(nums1, nums2 []int) int {
 	if len(nums1) == 0 || len(nums2) == 0 {
 		return 0
@@ -50,9 +53,7 @@ func MaxRepeatedSubArray(nums1, nums2 []int) int {
 	for i := 1; i <= len(nums1); i++ {
 		for j := 1; j <= len(nums2); j++ {
 			if nums1[i-1] == nums2[j-1] {
-				// fmt.Printf("nums1[%d]=nums2[%d]=%d\n", i-1, j-1, nums1[i-1])
 				dp[i][j] = dp[i-1][j-1] + 1
-				// fmt.Printf("dp[%d][%d]=%d\n", i, j, dp[i][j])
 			}
 			// } else {
 			// 	dp[i][j] = max(dp[i-1][j], dp[i][j-1])

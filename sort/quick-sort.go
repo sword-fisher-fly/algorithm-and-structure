@@ -13,6 +13,7 @@ func partition(arr []int, low, high int) {
 		}
 		arr[last] = arr[first]
 
+		// 右半部分
 		for first < last && arr[last] >= key {
 			last--
 		}

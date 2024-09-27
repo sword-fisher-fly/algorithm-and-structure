@@ -23,6 +23,8 @@ func FindMedianInTwoSortedArrays(nums1 []int, nums2 []int) int {
 	iMin := 0
 	iMax := m
 	// [iMin, iMax)
+	// m+n =7
+	// i+j = (7+1)/2 = 4  0,1,2,3,4,5,6
 	for iMin <= iMax {
 		i := (iMin + iMax) / 2
 		j := (m+n+1)/2 - i

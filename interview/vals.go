@@ -1,9 +1,5 @@
 package interview
 
-import (
-	"testing"
-)
-
 var (
 	// 左 -> 下 -> 右 -> 上
 	// (x,y)
@@ -13,14 +9,14 @@ var (
 		{-1, 0},
 		{0, 1},
 	}
+
+	directionsII = []int{1, 0, -1, 0, 1}
+	// for i := 1; i < len(directionsII); i++ {
+	//     (x, y) = (directionsII[i-1], directionsII[i])
+	// }
 )
 
 var (
 	RedColor   = "\033[31m"
 	ResetColor = "\033[0m"
 )
-
-func TestColor(t *testing.T) {
-	t.Logf("%s%s%s", RedColor, "hello", ResetColor)
-	// fmt.Printf("")
-}

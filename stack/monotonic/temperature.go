@@ -40,3 +40,24 @@ func DailyTemperatures(temperatures []int) []int {
 
 	return res
 }
+
+func DailyTemperaturesII(temperatures []int) []int {
+	res := make([]int, len(temperatures))
+
+	if len(temperatures) <= 1 {
+		return res
+	}
+
+	stack := []int{0} // 存储温度的下标, 代表第i天
+
+	for i := 1; i < len(temperatures); i++ {
+		for len(stack) > 0 && temperatures[i] > temperatures[stack[len(stack)-1]] {
+			res[stack[len(stack)-1]] = i - stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+		}
+
+		stack = append(stack, i)
+	}
+
+	return res
+}

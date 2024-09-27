@@ -11,9 +11,7 @@ func PreOrderStack(root *TreeNode) []any {
 	for curNode != nil || len(stackNode) > 0 {
 		for curNode != nil {
 			ret = append(ret, curNode.Val)
-			// if curNode.Right != nil {
 			stackNode = append(stackNode, curNode.Right)
-			// }
 			curNode = curNode.Left
 		}
 

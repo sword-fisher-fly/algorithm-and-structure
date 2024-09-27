@@ -22,7 +22,7 @@ func WorkBreak(s string, words []string) bool {
 	return dp[len(s)]
 }
 
-// ??
+// ?? Where goes wrong？
 // func WorkBreakII(s string, words []string) bool {
 // 	wordDict := make(map[string]bool)
 // 	for _, word := range words {
