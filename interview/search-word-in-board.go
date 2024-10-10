@@ -136,8 +136,47 @@ func SearchWordInBoardByBacktracing(board [][]byte, word string) bool {
 	return false
 }
 
-// TODO: 回溯就是深搜一种, 如从图的角度是否还存在另一种形式的写法??
+func isInBoard(board [][]byte, x, y int) bool {
+	return x >= 0 && x < len(board) && y >= 0 && y < len(board[0])
+}
+
 func SearchWordInBoardByDFS(board [][]byte, word string) bool {
+	if len(board) == 0 || len(board[0]) == 0 || len(word) == 0 {
+		return false
+	}
+
+	var dfs func(board [][]byte, word string, wordIndex int, x, y int, visited [][]bool) bool
+
+	dfs = func(board [][]byte, word string, wordIndex int, x, y int, visited [][]bool) bool {
+		if wordIndex == len(word)-1 {
+			return board[x][y] == word[wordIndex]
+		}
+
+		if board[x][y] == word[wordIndex] {
+			visited[x][y] = true
+			for _, d := range directions {
+				nextX, nextY := x+d[0], y+d[1]
+				if isInBoard(board, nextX, nextY) && !visited[nextX][nextY] && dfs(board, word, wordIndex+1, nextX, nextY, visited) {
+					return true
+				}
+			}
+
+			visited[x][y] = false // important here, otherwise it will fail.
+		}
+
+		return false
+	}
+
+	visited := make([][]bool, len(board))
+	for i := range visited {
+		visited[i] = make([]bool, len(board[0]))
+	}
+
+	for i := 0; i < len(board); i++ {
+		for j := 0; j < len(board[0]); j++ {
+			return dfs(board, word, 0, i, j, visited)
+		}
+	}
 
 	return false
 }

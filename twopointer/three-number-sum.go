@@ -5,7 +5,6 @@ import "sort"
 // 给定数组nums，找出符合a+b+c=0条件的3个元素，返回所有满足条件的三元组。
 // [-1,0,1,2,-1,-4]
 func ThreeSum(nums []int) [][3]int {
-	// sort.Sort(sort.IntSlice(nums))
 	sort.Ints(nums)
 
 	res := [][3]int{}
@@ -23,7 +22,6 @@ func ThreeSum(nums []int) [][3]int {
 		right := len(nums) - 1
 
 		for left < right {
-
 			if nums[i]+nums[left]+nums[right] < 0 {
 				left++
 			} else if nums[i]+nums[left]+nums[right] > 0 {

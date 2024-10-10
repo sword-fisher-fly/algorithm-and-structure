@@ -13,3 +13,20 @@ func dfs(grid [][]int, visited [][]bool, x, y int) {
 		// }
 	}
 }
+
+func dfsII(grid [][]int, visited [][]bool, x, y int) {
+	if visited[x][y] || grid[x][y] == 0 {
+		return
+	}
+	
+	visited[x][y] = true
+
+	for _, d := range directions {
+		nextX, nextY := x+d[0], y+d[1]
+		if nextX < 0 || nextX >= len(grid) || nextY < 0 || nextY >= len(grid[0]) {
+			continue
+		}
+
+		dfsII(grid, visited, nextX, nextY)
+	}
+}

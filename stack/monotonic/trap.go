@@ -1,5 +1,7 @@
 package monotonic
 
+import "fmt"
+
 // N根柱子, nums数组表示其高度
 // 求N根柱子最大续接雨水
 
@@ -83,4 +85,37 @@ func TrapByTwoPointer(heights []int) int {
 	}
 
 	return sum
+}
+
+// 双边界加逼法, 利用maxLeft和maxRight初始值为0, 剔除左右边界统计
+// heights: [4,2,0,3,2,5]
+// loop 1:
+func TrapII(heights []int) int {
+	res := 0
+	left, right := 0, len(heights)-1
+	maxLeft, maxRight := 0, 0
+
+	for left <= right {
+		if heights[left] <= heights[right] { // 确保左边界小于右边界
+			if heights[left] > maxLeft {
+				maxLeft = heights[left]
+			} else {
+				res += maxLeft - heights[left]
+
+				fmt.Printf("left=%d, volume=%d\n", left, maxLeft-heights[left])
+			}
+			left++
+		} else { // 确保右边界小于左边界
+			if heights[right] >= maxRight {
+				maxRight = heights[right]
+			} else {
+				res += maxRight - heights[right]
+
+				fmt.Printf("right=%d, volume=%d\n", right, maxRight-heights[right])
+			}
+			right--
+		}
+	}
+
+	return res
 }
