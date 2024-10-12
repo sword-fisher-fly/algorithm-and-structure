@@ -26,6 +26,10 @@ func ConcatenateList(head1, head2 *ListNode) *ListNode {
 		return head2
 	}
 
+	if head2 == nil {
+		return head1
+	}
+
 	cur := head1
 
 	for cur.Next != nil {

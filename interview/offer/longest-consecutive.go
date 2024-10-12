@@ -1,7 +1,6 @@
 package offer
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -13,8 +12,6 @@ func LongestConsecutive(nums []int) int {
 	sort.Ints(nums)
 	ans, t := 1, 1
 	for i, x := range nums[1:] {
-		fmt.Printf("i=%d, x=%d, nums[%d]=%d\n", i, x, i, nums[i])
-
 		if x == nums[i] {
 			continue
 		}

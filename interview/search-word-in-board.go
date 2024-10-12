@@ -30,6 +30,7 @@ func SearchWordInBoardByBFS(board [][]byte, word string) bool {
 	m, n := len(board), len(board[0])
 
 	bfs := func(board [][]byte, word string, wordIndex int, x, y int) bool {
+		// 单词长度为1的情况
 		if wordIndex == len(word) {
 			return true
 		}
@@ -53,9 +54,7 @@ func SearchWordInBoardByBFS(board [][]byte, word string) bool {
 					continue
 				}
 
-				// if board[nextX][nextY] == word[wordIndex] && !visited[nextX][nextY] {
-				wordIndex++
-				if wordIndex == len(word) {
+				if wordIndex == len(word)-1 {
 					visited[nextX][nextY] = true
 					fmt.Printf("mark the path:\n%s\n", colorPathInBoard(board, visited))
 					return true
@@ -63,9 +62,9 @@ func SearchWordInBoardByBFS(board [][]byte, word string) bool {
 
 				queue = append(queue, [2]int{nextX, nextY})
 				visited[nextX][nextY] = true
-				break // important here, otherwise it will fail.
-				// }
 			}
+
+			wordIndex++
 		}
 
 		return false
@@ -78,6 +77,69 @@ func SearchWordInBoardByBFS(board [][]byte, word string) bool {
 			}
 
 			if bfs(board, word, 1, i, j) {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
+func SearchWordInBoardByBFSII(board [][]byte, word string) bool {
+	if len(board) == 0 || len(board[0]) == 0 {
+		return false
+	}
+
+	m, n := len(board), len(board[0])
+
+	bfs := func(board [][]byte, word string, x, y int) bool {
+		if len(word) == 1 && word[0] == board[x][y] {
+			return true
+		}
+
+		if word[0] != board[x][y] {
+			return false
+		}
+
+		visited := make([][]bool, m)
+		for i := 0; i < m; i++ {
+			visited[i] = make([]bool, n)
+		}
+
+		queue := [][2]int{{x, y}}
+		visited[x][y] = true
+		wordIndex := 1
+
+		for len(queue) > 0 {
+			curX, curY := queue[0][0], queue[0][1]
+			queue = queue[1:]
+
+			for _, dir := range directions {
+				nextX, nextY := curX+dir[0], curY+dir[1]
+				if !isInBoard(board, nextX, nextY) || visited[nextX][nextY] || board[nextX][nextY] != word[wordIndex] {
+					continue
+				}
+
+				if wordIndex == len(word)-1 {
+					visited[nextX][nextY] = true
+					fmt.Printf("mark the path:\n%s\n", colorPathInBoard(board, visited))
+
+					return true
+				}
+
+				queue = append(queue, [2]int{nextX, nextY})
+				visited[nextX][nextY] = true
+			}
+
+			wordIndex++
+		}
+
+		return false
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if bfs(board, word, i, j) {
 				return true
 			}
 		}
