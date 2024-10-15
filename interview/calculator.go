@@ -83,3 +83,9 @@ func EvalExpr(s string) int {
 
 	return ans
 }
+
+// TODO:
+// 中缀表达式
+// 后缀表达式
+// https://leetcode.cn/problems/evaluate-reverse-polish-notation/description/
+// https://zq99299.github.io/dsalg-tutorial/dsalg-java-hsp/05/05.html#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0

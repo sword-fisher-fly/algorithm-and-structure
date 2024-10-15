@@ -13,12 +13,31 @@ func TestIsPopOrder(t *testing.T) {
 		want bool
 	}{
 		{
-			name: "is pop order",
+			name: "pop order",
 			args: args{
 				pushV: []int{1, 2, 3, 4, 5},
 				popV:  []int{4, 5, 3, 2, 1},
 			},
 			want: true,
+		},
+		{
+			name: "pop order",
+			args: args{
+				pushV: []int{1, 2, 3, 4, 5},
+				popV:  []int{4, 3, 5, 2, 1},
+			},
+			want: true,
+		},
+		{
+			name: "no pop order 1",
+			args: args{
+				pushV: []int{1, 2, 3, 4, 5},
+				popV:  []int{4, 5, 1, 2, 3},
+				// 1) i:=0, tempStack 1,2,3,4 -> 1,2,3, j=4
+				// 2) i:=1, tempStack 1,2,3,5 -> 1,2,3, j=5
+				// 3) i:=2, tempStack 1,2,3  -> popV = 1 but it shoud popV = 3
+			},
+			want: false,
 		},
 		{
 			name: "no pop order",

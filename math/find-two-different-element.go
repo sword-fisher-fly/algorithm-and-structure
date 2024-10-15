@@ -17,7 +17,7 @@ func FindTwoDifferentElement(nums []int) [2]int {
 	}
 
 	res := [2]int{diff, diff}
-	last1Bit := (diff & (diff - 1)) ^ diff
+	last1Bit := (diff & (diff - 1)) ^ diff  // diff & (-diff)
 	for _, num := range nums {
 		if num&last1Bit == 0 {
 			res[0] ^= num

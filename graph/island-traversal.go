@@ -5,8 +5,7 @@ package graph
 // 2) 岛屿周长
 // 3) 最大岛屿面积
 // 4) 最大岛屿面积增强版
-// 5) 孤岛总面积/沉没孤岛
-
+// 5) 孤岛总面积/沉没孤岛(同等问题)
 
 // 1: 陆地 0: 水域
 // 输出: 计算岛屿的数量
@@ -44,11 +43,8 @@ func FindIslandsByBFS(grid [][]int) int {
 					continue
 				}
 
-				// if !visited[nextX][nextY] {
 				visited[nextX][nextY] = true
 				queue = append(queue, [2]int{nextX, nextY})
-				// visited[nextX][nextY] = true
-				// }
 			}
 		}
 	}
@@ -137,6 +133,157 @@ func MaxIslandArea(grid [][]int) int {
 				visited[i][j] = true
 				count = 1
 				dfs(grid, visited, i, j)
+				if count > maxArea {
+					maxArea = count
+				}
+			}
+		}
+	}
+
+	return maxArea
+}
+
+// 4) 最大岛屿面积增强版, 通过最多人工改变一个0为1后的最大岛屿面积
+func FindLargestAreaIslandByBFS(grid [][]int) int {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return 0
+	}
+
+	m, n := len(grid), len(grid[0])
+
+	visited := make([][]bool, m)
+	for i := range visited {
+		visited[i] = make([]bool, n)
+	}
+
+	// 借助mark标记相连的陆地
+	mark := 1
+	gridCountMap := make(map[int]int)
+
+	isAllLand := true
+	var bfs func([][]int, int, int)
+	bfs = func(grid [][]int, x, y int) {
+		grid[x][y] = mark
+		queue := [][2]int{{x, y}}
+
+		gridCountMap[mark] = 1
+
+		for len(queue) > 0 {
+			curX, curY := queue[0][0], queue[0][1]
+			queue = queue[1:]
+
+			for _, d := range directions {
+				nextX, nextY := curX+d[0], curY+d[1]
+				if isInBoard(grid, nextX, nextY) && !visited[nextX][nextY] && grid[nextX][nextY] == 1 {
+					grid[nextX][nextY] = mark
+					gridCountMap[mark]++
+					queue = append(queue, [2]int{nextX, nextY})
+				}
+			}
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 0 {
+				isAllLand = false
+			}
+
+			if !visited[i][j] && grid[i][j] == 1 {
+				mark++
+				bfs(grid, i, j)
+			}
+		}
+	}
+
+	if isAllLand {
+		return m * n
+	}
+
+	maxArea := 0
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 0 {
+				count := 1
+				for _, d := range directions {
+					nextX, nextY := i+d[0], j+d[1]
+					if isInBoard(grid, nextX, nextY) && grid[nextX][nextY] != 0 {
+						count += gridCountMap[grid[nextX][nextY]]
+					}
+				}
+
+				if count > maxArea {
+					maxArea = count
+				}
+			}
+		}
+	}
+
+	return maxArea
+}
+
+func FindLargestAreaIslandByDFS(grid [][]int) int {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return 0
+	}
+
+	m, n := len(grid), len(grid[0])
+
+	visited := make([][]bool, m)
+	for i := range visited {
+		visited[i] = make([]bool, n)
+	}
+
+	mark := 2
+
+	isAllLands := true
+
+	gridCountMap := make(map[int]int)
+
+	var dfs func(int, int)
+	dfs = func(x, y int) {
+		grid[x][y] = mark
+		gridCountMap[mark]++
+
+		for _, d := range directions {
+			nextX, nextY := x+d[0], y+d[1]
+			if isInBoard(grid, nextX, nextY) && !visited[nextX][nextY] && grid[nextX][nextY] == 1 {
+				dfs(nextX, nextY)
+			}
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 0 {
+				isAllLands = false
+			}
+
+			if !visited[i][j] && grid[i][j] == 1 {
+				dfs(i, j)
+				mark++
+			}
+		}
+	}
+
+	if isAllLands {
+		return m * n
+	}
+
+	maxArea := 0
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 0 {
+				count := 1
+				for _, d := range directions {
+					nextX, nextY := i+d[0], j+d[1]
+					if isInBoard(grid, nextX, nextY) && grid[nextX][nextY] != 0 {
+						count += gridCountMap[grid[nextX][nextY]]
+					}
+				}
+
 				if count > maxArea {
 					maxArea = count
 				}

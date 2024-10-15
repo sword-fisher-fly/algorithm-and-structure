@@ -195,3 +195,139 @@ func TestMaxIsolatedIslandAreaByBFS(t *testing.T) {
 		})
 	}
 }
+
+func TestFindLargestAreaIslandByBFS(t *testing.T) {
+	type args struct {
+		grid [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "2*2 grid",
+			args: args{
+				grid: [][]int{
+					{1, 0},
+					{0, 1},
+				},
+			},
+			want: 3,
+		},
+		{
+			name: "full of all land in the 5*4 grid",
+			args: args{
+				grid: [][]int{
+					{1, 1, 1, 1, 1},
+					{1, 1, 1, 1, 1},
+					{1, 1, 1, 1, 1},
+					{1, 1, 1, 1, 1},
+				},
+			},
+			want: 20,
+		},
+		{
+			name: "5*4 grid with one flip which can connect the two islands",
+			args: args{
+				grid: [][]int{
+					{1, 1, 0, 0, 0},
+					{1, 1, 0, 0, 0},
+					{0, 0, 1, 0, 0},
+					{0, 0, 1, 1, 1},
+				},
+			},
+			want: 9,
+		},
+		{
+			name: "two isolated islands in the 7*8 grid",
+			args: args{
+				grid: [][]int{
+					{0, 1, 0, 0, 0, 0, 0, 0},
+					{1, 1, 1, 0, 0, 0, 1, 1},
+					{0, 1, 1, 1, 0, 1, 1, 1},
+					{0, 0, 0, 0, 1, 0, 0, 0},
+					{0, 1, 0, 0, 1, 0, 0, 0},
+					{0, 0, 1, 0, 0, 0, 0, 0},
+					{0, 1, 1, 0, 0, 1, 1, 0},
+				},
+			},
+			want: 15,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindLargestAreaIslandByBFS(tt.args.grid); got != tt.want {
+				t.Errorf("FindLargestAreaIslandByBFS() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestFindLargestAreaIslandByDFS(t *testing.T) {
+	type args struct {
+		grid [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "2*2 grid",
+			args: args{
+				grid: [][]int{
+					{1, 0},
+					{0, 1},
+				},
+			},
+			want: 3,
+		},
+		{
+			name: "full of all land in the 5*4 grid",
+			args: args{
+				grid: [][]int{
+					{1, 1, 1, 1, 1},
+					{1, 1, 1, 1, 1},
+					{1, 1, 1, 1, 1},
+					{1, 1, 1, 1, 1},
+				},
+			},
+			want: 20,
+		},
+		{
+			name: "5*4 grid with one flip which can connect the two islands",
+			args: args{
+				grid: [][]int{
+					{1, 1, 0, 0, 0},
+					{1, 1, 0, 0, 0},
+					{0, 0, 1, 0, 0},
+					{0, 0, 1, 1, 1},
+				},
+			},
+			want: 9,
+		},
+		{
+			name: "two isolated islands in the 7*8 grid",
+			args: args{
+				grid: [][]int{
+					{0, 1, 0, 0, 0, 0, 0, 0},
+					{1, 1, 1, 0, 0, 0, 1, 1},
+					{0, 1, 1, 1, 0, 1, 1, 1},
+					{0, 0, 0, 0, 1, 0, 0, 0},
+					{0, 1, 0, 0, 1, 0, 0, 0},
+					{0, 0, 1, 0, 0, 0, 0, 0},
+					{0, 1, 1, 0, 0, 1, 1, 0},
+				},
+			},
+			want: 15,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindLargestAreaIslandByDFS(tt.args.grid); got != tt.want {
+				t.Errorf("FindLargestAreaIslandByDFS() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

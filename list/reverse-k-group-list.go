@@ -34,6 +34,7 @@ func ReverseKGroup(head *ListNode, k int) *ListNode {
 		node = node.Next
 	}
 
+	// reverseBetweenTwoNodes(1,4) -> 3,2,1,4
 	newHead := reverseBetweenTwoNodes(head, node)
 	head.Next = ReverseKGroup(node, k)
 
