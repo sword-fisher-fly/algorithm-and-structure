@@ -18,7 +18,7 @@ func TestTopKFrequence(t *testing.T) {
 		{
 			name: "2,2,3,1,1",
 			args: args{
-				nums: []int{2, 2, 3, 1, 1},
+				nums: []int{2, 2, 3, 2, 1, 1},
 				k:    2,
 			},
 			want: []int{1, 2},
@@ -27,10 +27,10 @@ func TestTopKFrequence(t *testing.T) {
 		{
 			name: "2,2,3,1,1,4,5,9,8,4,5,4",
 			args: args{
-				nums: []int{2, 2, 3, 1, 1, 4, 5, 9, 8, 4, 5, 4},
+				nums: []int{2, 2, 2, 3, 2, 1, 1, 5, 5, 9, 8, 4, 5, 4},
 				k:    2,
 			},
-			want: []int{5, 4},
+			want: []int{5, 2},
 		},
 	}
 	for _, tt := range tests {

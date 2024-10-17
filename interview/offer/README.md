@@ -7,6 +7,8 @@
 - [] 反转链表
 - [x] 链表排序(O(nlogn))
 - [ ] 循环排序链表插入数值
+- [ ] 重排链表
+- [ ] 两个链表第一个重合点
 
 ## 数组
 
@@ -14,17 +16,25 @@
 - [x] 旋转数组
 - [] 插入、删除和随机访问都是O(1)的容器
 - [] 最近请求次数
+- [] 二叉搜索寻找左右边界
+- [] 乘积小于k的子数组
+- [] 最长连续序列
+- [] 二维子矩阵和
 
 ## 栈
 
 - [x] 栈的压入与弹出序列(https://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=308&tqId=23290&ru=/exam/oj&qru=/ta/algorithm-start/question-ranking&sourceUrl=%2Fexam%2Foj%3Fpage%3D1%26tab%3D%25E7%25AE%2597%25E6%25B3%2595%25E7%25AC%2594%25E8%25AF%2595%26topicId%3D308)
 - [ ] 直方图最大矩形面积
+- [ ] 小行星碰撞
 
 ## 队列
 
 ## 哈希表
 
 - [x] 子数组和(https://leetcode.cn/problems/subarray-sum-equals-k/solutions/238572/he-wei-kde-zi-shu-zu-by-leetcode-solution/)
+
+- [] 前缀和(https://leetcode.cn/problems/contiguous-array/)
+- 
 
 ## 字符串
 
@@ -34,7 +44,8 @@
 ## 数学/位运算
 
 - [x] 整数相除
-- [ ] 
+- [ ] 单词长度最大乘积
+- [] 只出现一次的数字
 
 ## 二叉树
 
@@ -93,3 +104,5 @@
 
 - [x] 滑动窗口平均值(https://leetcode.cn/problems/moving-average-from-data-stream/description/)
 - [x] 数据流中第K大元素(https://leetcode.cn/problems/kth-largest-element-in-a-stream/solutions/600598/shu-ju-liu-zhong-de-di-k-da-yuan-su-by-l-woz8/)
+  
+## 数学

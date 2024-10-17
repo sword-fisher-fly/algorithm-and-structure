@@ -53,3 +53,15 @@ func LongestPalindromeByExpand(s string) string {
 
 	return s[start : end+1]
 }
+
+// TODO:
+// 最小回文字符串切割数
+// 给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文。
+
+// 返回符合要求的 最少分割次数
+// 分而治之
+// 1) 回文标记
+// 2）类似最大子序列求最小分割数
+func MinPalindromeCut(s string) int {
+	return 0
+}

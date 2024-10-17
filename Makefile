@@ -20,10 +20,10 @@ else ifeq ($(OS), Linux)
 endif
 
 test:
-	go test -v -timeout 30s ./array ./backtracing ./binarysearch ./dynamic ./graph ./greedy ./hash ./list ./math ./sort ./stack ./str ./twopointer 
+	go test -v -timeout 30s ./array ./backtracing ./binarysearch ./dynamic ./graph ./greedy ./hash ./list ./math ./sort ./stack ./str ./twopointer ./recursive
 
 test-all:
-	go test -v -timeout 30s ./array ./backtracing ./binarysearch ./dynamic ./graph ./greedy ./hash ./list ./math ./sort ./stack ./str ./twopointer ./interview/...
+	go test -v -timeout 30s ./array ./backtracing ./binarysearch ./dynamic ./graph ./greedy ./hash ./list ./math ./sort ./stack ./str ./twopointer ./recursive ./interview/...
 
 yesterday-stats:
 	@echo "Fetching commit statistics for $(YESTERDAY)..."; \

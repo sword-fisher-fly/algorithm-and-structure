@@ -1,11 +1,5 @@
 package offer
 
-type TreeNode struct {
-	Val   interface{}
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 type BSTree struct {
 	root *TreeNode
 }
