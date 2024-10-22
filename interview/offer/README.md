@@ -9,6 +9,7 @@
 - [ ] 循环排序链表插入数值
 - [ ] 重排链表
 - [ ] 两个链表第一个重合点
+- [ ] 合并k个有序链表 
 
 ## 数组
 
@@ -20,6 +21,7 @@
 - [] 乘积小于k的子数组
 - [] 最长连续序列
 - [] 二维子矩阵和
+- [x] 相对排序数组
 
 ## 栈
 
@@ -77,14 +79,19 @@
 ## 并查集
 
 - [x] 二分图
-- [ ] 
+- [ ] 相似字符串(https://leetcode.cn/problems/similar-string-groups/)
+- [ ] 多余的边(https://leetcode.cn/problems/redundant-connection/)
 
 **难点**
 
 ## 深度搜索/回溯
 
 - [x] 复原IP地址
-- [ ] 
+- [x] 子集有/无重复元素(https://leetcode.cn/problems/subsets/)
+- [x] 含有k个元素的组合(https://leetcode.cn/problems/combinations/submissions/574743538/)
+- [x] 允许重复元素的目标值组合(https://leetcode.cn/problems/combination-sum/) 
+- [x] 含有重复元素集合的组合(https://leetcode.cn/problems/combination-sum-ii/) 
+- [ ] 生成括号(https://leetcode.cn/problems/generate-parentheses/submissions/574826268/)
 
 ## 广度搜索
 

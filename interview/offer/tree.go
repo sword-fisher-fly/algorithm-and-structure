@@ -24,3 +24,24 @@ func RightSideView(root *TreeNode) []int {
 func FindLargestValueInEachTreeRow(root *TreeNode) []int {
 	return nil
 }
+
+// 4. 二叉树根节点到叶子结点的和
+
+func SumNumbers(root *TreeNode) int {
+
+	var dfs func(*TreeNode, int) int
+	dfs = func(r *TreeNode, sum int) int {
+		if r == nil {
+			return 0
+		}
+
+		sum = sum*10 + r.Val.(int)
+		if r.Left == nil && r.Right == nil {
+			return sum
+		}
+
+		return dfs(root.Left, sum) + dfs(root.Right, sum)
+	}
+
+	return dfs(root, 0)
+}

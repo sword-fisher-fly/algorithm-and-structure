@@ -143,6 +143,42 @@ func MaxIslandArea(grid [][]int) int {
 	return maxArea
 }
 
+// dfs有返回值
+func MaxIslandAreaII(grid [][]int) int {
+	maxArea := 0
+	m, n := len(grid), len(grid[0])
+
+	directions := []int{1, 0, -1, 0, 1}
+	var dfs func(int, int) int
+
+	dfs = func(x, y int) int {
+		if grid[x][y] == 0 {
+			return 0
+		}
+
+		ans := 1
+		grid[x][y] = 0
+
+		for i := 0; i < len(directions)-1; i++ {
+			deltaX, deltaY := directions[i], directions[i+1]
+			nextX, nextY := x+deltaX, y+deltaY
+			if isInBoard(grid, nextX, nextY) {
+				ans += dfs(nextX, nextY)
+			}
+		}
+
+		return ans
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			maxArea = max(maxArea, dfs(i, j))
+		}
+	}
+
+	return maxArea
+}
+
 // 4) 最大岛屿面积增强版, 通过最多人工改变一个0为1后的最大岛屿面积
 func FindLargestAreaIslandByBFS(grid [][]int) int {
 	if len(grid) == 0 || len(grid[0]) == 0 {
