@@ -87,6 +87,7 @@ b. 同一个字符不能访问两次
 - [] 递增子序列(https://www.programmercarl.com/0491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97.html#%E6%80%9D%E8%B7%AF)
 - [] 最长递增子序列
 - [] 最长递增子序列的个数(https://www.programmercarl.com/0673.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0.html#%E6%80%9D%E8%B7%AF)
+- [x] 最长公共子序列长度(https://leetcode.cn/problems/longest-common-subsequence/description/) 
 
 ### 11. 贪心
 
