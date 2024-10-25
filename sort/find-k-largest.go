@@ -13,6 +13,7 @@ func quickselect(nums []int, l, r, k int) int {
 	// [3, 2, 1, 5, 6, 4]
 	// 1)partion = 3, i = 0, j=2, [1,2 3,5,6,4]
 	// 2)
+	partitionIdx := l
 	for i < j {
 		// 左边 找到第一个 nums[i] >= partion
 		i++
@@ -31,10 +32,15 @@ func quickselect(nums []int, l, r, k int) int {
 
 		fmt.Printf("swap: i=%d, j=%d\n", i, j)
 		if i < j {
+			partitionIdx = j
 			nums[i], nums[j] = nums[j], nums[i]
 		}
 	}
 
+	if partitionIdx+1 == k {
+		return nums[k]
+	}
+	fmt.Printf("num[k]=%d\n", nums[k])
 	if k <= j {
 		// [1,2 3,5,6,4] l=0, j =2, k=2
 		fmt.Printf("quickselect(nums, l, j, k): l=%d, j =%d, k=%d\n", l, j, k)
