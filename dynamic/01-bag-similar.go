@@ -14,14 +14,6 @@ import "math"
 // 如果求组合数就是外层for循环遍历物品，内层for遍历背包
 // 如果求排列数就是外层for遍历背包，内层for循环遍历物品
 
-func abs(a int) int {
-	if a > 0 {
-		return a
-	}
-
-	return -a
-}
-
 // 目标和: 求所有添加符号的方法数
 
 // dp[j]: 总和为j的方法数
@@ -29,6 +21,14 @@ func abs(a int) int {
 // left - right = target
 // bagSize = (target+sum)/2
 func FindTargetSumWays(nums []int, target int) int {
+	abs := func(a int) int {
+		if a > 0 {
+			return a
+		}
+
+		return -a
+	}
+
 	sum := 0
 	for _, v := range nums {
 		sum += v
@@ -48,7 +48,7 @@ func FindTargetSumWays(nums []int, target int) int {
 	dp[0] = 1
 	for i := 0; i < len(nums); i++ { // 物品
 		for j := bagSize; j >= nums[i]; j-- { // 背包
-			// for j := nums[i]; j <= bagSize; j++ {
+			// for j := nums[i]; j <= bagSize; j++ { // NOT PASS
 			dp[j] += dp[j-nums[i]]
 		}
 	}
@@ -109,7 +109,7 @@ func CoinChange(amount int, coins []int) int {
 	dp[0] = 1
 	for i := 0; i < len(coins); i++ { // 物品
 		for j := coins[i]; j <= amount; j++ { // 背包
-			// for j := amount; j >= coins[i]; j-- {
+			// for j := amount; j >= coins[i]; j-- { // NOT PASS
 			dp[j] += dp[j-coins[i]]
 		}
 	}
@@ -125,11 +125,9 @@ func CoinChangeWithMinCount(coins []int, amount int) int {
 	}
 
 	dp[0] = 0
-	for i := 0; i < len(coins); i++ {
-		for j := coins[i]; j <= amount; j++ {
-			if dp[j-coins[i]] != math.MaxInt {
-				dp[j] = min(dp[j], dp[j-coins[i]]+1)
-			}
+	for i := 0; i < len(coins); i++ { //物品
+		for j := coins[i]; j <= amount; j++ { //背包
+			dp[j] = min(dp[j], dp[j-coins[i]]+1)
 		}
 	}
 
@@ -148,9 +146,9 @@ func CoinChangeWithMinCountII(coins []int, amount int) int {
 
 	dp[0] = 0
 
-	for i := 1; i <= amount; i++ {
-		for j := 0; j < len(coins); j++ {
-			if i >= coins[j] && dp[i-coins[j]] != math.MaxInt {
+	for i := 1; i <= amount; i++ { // 背包
+		for j := 0; j < len(coins); j++ { // 物品
+			if i >= coins[j] {
 				dp[i] = min(dp[i], dp[i-coins[j]]+1)
 			}
 		}

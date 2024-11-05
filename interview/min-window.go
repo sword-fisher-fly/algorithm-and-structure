@@ -28,7 +28,6 @@ func MinWindow(s string, t string) string {
 			}
 		}
 
-		fmt.Println("==== check ====")
 		return true
 	}
 

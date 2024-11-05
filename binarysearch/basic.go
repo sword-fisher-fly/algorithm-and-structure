@@ -48,7 +48,7 @@ func BinarySearchInSortedArrayRecursive(arr []int, target int) int {
 	}
 
 	left, right := 0, len(arr)
-	mid := left + (right-left)/2
+	mid := left + (right-left)/2 //靠近右边界
 	if target == arr[mid] {
 		return mid
 	}
@@ -58,4 +58,3 @@ func BinarySearchInSortedArrayRecursive(arr []int, target int) int {
 
 	return BinarySearchInSortedArrayRecursive(arr[mid+1:], target)
 }
-

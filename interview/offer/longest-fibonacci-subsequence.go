@@ -18,7 +18,7 @@ func LenLongestFibSubseq(arr []int) int {
 	// 1,1,2,3,5,8
 	ans := 0
 	for i, x := range arr {
-		for j := i - 1; j >= 0 && arr[j]*2 > x; j-- {
+		for j := i - 1; j >= 0 && arr[j]*2 >= x; j-- {
 			if k, ok := indices[x-arr[j]]; ok {
 				dp[j][i] = max(dp[k][j]+1, 3)
 				ans = max(ans, dp[j][i])

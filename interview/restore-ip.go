@@ -36,7 +36,7 @@ func RestoreIpAddresses(s string) []string {
 		}
 
 		// 剪枝
-		if start > len(s) || len(path) >= 4 {
+		if start >= len(s) || len(path) >= 4 {
 			return
 		}
 
@@ -89,7 +89,7 @@ func RestoreIpAddressesII(s string) []string {
 		}
 
 		// 剪枝
-		if start > len(s) || len(path) >= 4 {
+		if start >= len(s) || len(path) >= 4 {
 			return
 		}
 

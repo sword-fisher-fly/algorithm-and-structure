@@ -59,6 +59,7 @@ func MaxValueForBagII(weights []int, values []int, bagWeight int) int {
 	return dp[len(weights)-1][bagWeight]
 }
 
+// 滚动数组
 func MaxValueForBagIII(weights []int, values []int, bagWeight int) int {
 	if len(weights) != len(values) {
 		return -1

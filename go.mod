@@ -1,3 +1,3 @@
 module github.com/sword-fisher-fly/algorithm-and-structure
 
-go 1.22.0
+go 1.23
