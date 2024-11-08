@@ -66,14 +66,6 @@ func TestMinDeleteDistanceII(t *testing.T) {
 			},
 			want: 2,
 		},
-		// {
-		// 	name: "lrbb and mqbhcda",
-		// 	args: args{
-		// 		word1: "lrbb",
-		// 		word2: "mqbhcda",
-		// 	},
-		// 	want: 6,
-		// },
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -110,14 +102,6 @@ func TestMinEditDistance(t *testing.T) {
 			},
 			want: 2,
 		},
-		// {
-		// 	name: "lrbb and mqbhcda",
-		// 	args: args{
-		// 		word1: "lrbb",
-		// 		word2: "mqbhcda",
-		// 	},
-		// 	want: 6,
-		// },
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -153,14 +137,6 @@ func TestMinDeleteDistanceInSimple(t *testing.T) {
 				word2: "sea",
 			},
 			want: 2,
-		},
-		{
-			name: "lrbb and mqbhcda",
-			args: args{
-				word1: "lrbb",
-				word2: "mqbhcda",
-			},
-			want: 6,
 		},
 	}
 	for _, tt := range tests {

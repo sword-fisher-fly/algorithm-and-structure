@@ -40,7 +40,7 @@ func RobberHoustOnLoop(arr []int) int {
 		return arr[0]
 	}
 
-	return max(RobberHouseOnLine(arr[0:len(arr)-1]), RobberHouseOnLine(arr[1:len(arr)]))
+	return max(RobberHouseOnLine(arr[0:len(arr)-1]), RobberHouseOnLine(arr[1:]))
 }
 
 // 房屋排列成二叉树

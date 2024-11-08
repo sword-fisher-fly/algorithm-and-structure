@@ -49,7 +49,6 @@ func EvalExpr(s string) int {
 		}
 
 		if isOperator(s[i]) || i == len(s)-1 {
-			// fmt.Printf("i=%d, len(s)=%d\n", i, len(s))
 			switch sign {
 			case '+':
 				stack = append(stack, num)
@@ -76,7 +75,6 @@ func EvalExpr(s string) int {
 
 	ans := 0
 
-	// fmt.Printf("stack=%v\n", stack)
 	for i := range stack {
 		ans += stack[i]
 	}
