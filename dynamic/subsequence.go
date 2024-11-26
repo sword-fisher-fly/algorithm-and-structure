@@ -75,6 +75,7 @@ func MaxRepeatedSubArrayII(nums1, nums2 []int) int {
 	dp := make([]int, len(nums2)+1)
 
 	result := 0
+	// 滚动数组
 	for i := 1; i <= len(nums1); i++ {
 		for j := len(nums2); j > 0; j-- {
 			if nums1[i-1] == nums2[j-1] {
@@ -138,6 +139,27 @@ func LongestCommonSubSequenceII(s1 string, s2 string) int {
 	}
 
 	return dp[len(s1)][len(s2)]
+}
+
+func LongestCommonSubsequenceIII(s1, s2 string) int {
+	m, n := len(s1), len(s2)
+	A, B := []byte(s1), []byte(s2)
+
+	cur := make([]int, m+1)
+	prev := make([]int, m+1)
+
+	for j := 0; j < n; j++ {
+		for i := 0; i < m; i++ {
+			rec := max(prev[i+1], cur[i])
+			if A[i] == B[j] {
+				cur[i+1] = max(rec, prev[i]+1)
+			} else {
+				cur[i+1] = rec
+			}
+		}
+		cur, prev = prev, cur
+	}
+	return prev[m]
 }
 
 // 5） 最长子序和

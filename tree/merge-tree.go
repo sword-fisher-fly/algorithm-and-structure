@@ -33,6 +33,7 @@ func MergeTreesByIteration(root1, root2 *TreeNode) *TreeNode {
 		queue = queue[2:]
 
 		curNode1.Val = curNode1.Val.(int) + curNode2.Val.(int)
+		// 2*2 种情况
 		if curNode1.Left != nil && curNode2.Left != nil {
 			queue = append(queue, curNode1.Left)
 			queue = append(queue, curNode2.Left)

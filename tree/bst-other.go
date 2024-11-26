@@ -83,6 +83,31 @@ func IsValidBSTByIteration(root *TreeNode) bool {
 	return true
 }
 
+func isValidBST(root *TreeNode) bool {
+	// write code here
+	if root == nil {
+		return true
+	}
+
+	var preNode *TreeNode
+	var inOrder func(*TreeNode) bool
+	inOrder = func(t *TreeNode) bool {
+		if t == nil {
+			return true
+		}
+		left := inOrder(t.Left)
+		if preNode != nil && preNode.Val.(int) > t.Val.(int) {
+			return false
+		}
+		preNode = t
+		right := inOrder(t.Right)
+
+		return left && right
+	}
+
+	return inOrder(root)
+}
+
 // 非递减二叉搜索树
 // [1,2,3,4,5,5,6,7,8]
 func FindMode(root *TreeNode) []any {
@@ -274,7 +299,6 @@ func GenerateBSTree(n int) []*TreeNode {
 			for l := 0; l < len(left); l++ {
 				for r := 0; r < len(right); r++ {
 					root := &TreeNode{Val: i, Left: left[l], Right: right[r]}
-					// root.Left, root.Right = left[l], right[r]
 					res = append(res, root)
 				}
 			}

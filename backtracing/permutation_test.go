@@ -24,6 +24,11 @@ func TestPermutation(t *testing.T) {
 			args: args{s: "abc"},
 			want: []string{"abc", "acb", "bac", "bca", "cab", "cba"},
 		},
+		{
+			name: "3 items",
+			args: args{s: "abb"},
+			want: []string{"abb", "bab", "bba"},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

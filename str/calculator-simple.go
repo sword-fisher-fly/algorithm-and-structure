@@ -16,14 +16,22 @@ func Calculate(s string) int {
 	x := 0
 	var sign byte = '+'
 
+	isOperator := func(c byte) bool {
+		return c == '+' || c == '-' || c == '*' || c == '/'
+	}
+
 	stack := []int{}
 
 	for i := 0; i < n; i++ {
+		if s[i] == ' ' {
+			continue
+		}
+
 		if isDigit(s[i]) {
 			x = x*10 + int(s[i]-'0')
 		}
 
-		if i == n-1 || !isDigit(s[i]) && s[i] != ' ' {
+		if i == n-1 || isOperator(s[i]) {
 			fmt.Printf("stack= %v, x=%d, sign=%c, s[%d]=%c\n", stack, x, sign, i, s[i])
 			switch sign {
 			case '+':

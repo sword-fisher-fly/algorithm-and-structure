@@ -41,6 +41,7 @@ func TopKFrequent(nums []int, k int) []int {
 
 	heap.Init(h)
 
+	// min-Heap
 	for key, val := range numMap {
 		heap.Push(h, [2]int{key, val})
 		if h.Len() > k {

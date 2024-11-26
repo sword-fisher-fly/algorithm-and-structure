@@ -31,6 +31,15 @@ func TestConstructTreeFromPreOrderAndInOrder(t *testing.T) {
 			},
 			wantPostOrder: []any{4, 5, 2, 6, 7, 3, 1},
 		},
+		//[1,2,4,5,6,3],[5,4,6,2,1,3]
+		{
+			name: "case 3",
+			args: args{
+				preorder: []int{1, 2, 4, 5, 6, 3},
+				inorder:  []int{5, 4, 6, 2, 1, 3},
+			},
+			wantPostOrder: []any{5, 6, 4, 2, 3, 1},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

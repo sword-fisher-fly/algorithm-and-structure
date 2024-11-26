@@ -1,7 +1,7 @@
 
 .PHONY: all
 
-all: test
+all: test						
 
 # Check the operating system
 ifeq ($(shell uname), Darwin)

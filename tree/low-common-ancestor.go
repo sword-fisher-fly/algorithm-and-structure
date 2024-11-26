@@ -34,7 +34,7 @@ func LowestCommonAncestorInBSTByRecursive(root, p, q *TreeNode) *TreeNode {
 // }
 
 // 普通二叉树, 从底向上回溯
-// 前提: 假设p、q在二叉树存在
+// 前提: 假设p、q为二叉树的节点（有无可能不存在呢？？）
 func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	if root == nil || root == p || root == q {
 		return root

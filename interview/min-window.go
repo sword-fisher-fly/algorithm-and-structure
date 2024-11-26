@@ -32,7 +32,9 @@ func MinWindow(s string, t string) string {
 	}
 
 	left, right := -1, -1
+	fmt.Printf("check: %v\n", check())
 	if check() {
+		fmt.Printf("==== init check ====, s=%s, t=%s\n", s, t)
 		return s[0:len(t)]
 	}
 

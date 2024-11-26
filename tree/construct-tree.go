@@ -18,26 +18,33 @@ func ConstructTreeFromPreOrderAndInOrder(preorder []int, inorder []int) *TreeNod
 
 	constructTreeFromPreOrderAndInOrder = func(preorder []int, preStart int, preEnd int, inorder []int, inStart int, inEnd int) *TreeNode {
 		//fmt.Printf("preStart=%d, preEnd=%d, inStart=%d, inEnd=%d\n", preStart, preEnd, inStart, inEnd)
-		root := &TreeNode{Val: preorder[preStart]}
-		if preEnd-preStart == 1 {
-			return root
+		if preStart > preEnd || inStart > inEnd {
+			return nil
 		}
 
-		delemiterIndex := 0
-		for i := inStart; i < inEnd; i++ {
+		root := &TreeNode{Val: preorder[preStart]}
+
+		delimeterIdx := 0
+		for i := inStart; i <= inEnd; i++ {
 			if preorder[preStart] == inorder[i] {
-				delemiterIndex = i
+				delimeterIdx = i
+				break
 			}
 		}
 
-		//fmt.Printf("delemiterIndex=%d, preStart+1=%d, preStart+1+(delemiterIndex-inStart)=%d\n", delemiterIndex, preStart+1, preStart+1+(delemiterIndex-inStart))
-		root.Left = constructTreeFromPreOrderAndInOrder(preorder, preStart+1, preStart+1+(delemiterIndex-inStart), inorder, inStart, delemiterIndex)
-		root.Right = constructTreeFromPreOrderAndInOrder(preorder, preStart+1+(delemiterIndex-inStart), preEnd, inorder, delemiterIndex+1, inEnd)
+		leftSize := delimeterIdx - inStart
+		rightSize := inEnd - delimeterIdx
+		//fmt.Printf("delimeterIdx=%d, preStart+1=%d, preStart+1+(delimeterIdx-inStart)=%d\n", delimeterIdx, preStart+1, preStart+1+(delimeterIdx-inStart))
+		// root.Left = constructTreeFromPreOrderAndInOrder(preorder, preStart+1, preStart+1+(delimeterIdx-inStart), inorder, inStart, delimeterIdx)
+		// root.Right = constructTreeFromPreOrderAndInOrder(preorder, preStart+1+(delimeterIdx-inStart), preEnd, inorder, delimeterIdx+1, inEnd)
 
+		root.Left = constructTreeFromPreOrderAndInOrder(preorder, preStart+1, preStart+leftSize, inorder, inStart, inStart+leftSize-1)
+		// root.Right = constructTreeFromPreOrderAndInOrder(preorder, preEnd-rightSize+1, preEnd, inorder, delimeterIdx+1, inEnd) // ok ??
+		root.Right = constructTreeFromPreOrderAndInOrder(preorder, preEnd-rightSize+1, preEnd, inorder, inEnd-rightSize+1, inEnd)
 		return root
 	}
 
-	return constructTreeFromPreOrderAndInOrder(preorder, 0, len(preorder), inorder, 0, len(inorder))
+	return constructTreeFromPreOrderAndInOrder(preorder, 0, len(preorder)-1, inorder, 0, len(inorder)-1)
 }
 
 // in-order: left -> root -> right [4,2,5,1,6,3,7]
@@ -52,15 +59,15 @@ func ConstructTreeFromInOrderAndPostOrder(inorder []int, postorder []int) *TreeN
 			return root
 		}
 
-		delemiterIndex := 0
+		delimeterIdx := 0
 		for i := inStart; i < inEnd; i++ {
 			if postorder[postEnd-1] == inorder[i] {
-				delemiterIndex = i
+				delimeterIdx = i
 			}
 		}
 
-		root.Left = constructTreeFromInOrderAndPostOrder(inorder, inStart, delemiterIndex, postorder, postStart, postStart+(delemiterIndex-inStart))
-		root.Right = constructTreeFromInOrderAndPostOrder(inorder, delemiterIndex+1, inEnd, postorder, postStart+(delemiterIndex-inStart), postEnd-1)
+		root.Left = constructTreeFromInOrderAndPostOrder(inorder, inStart, delimeterIdx, postorder, postStart, postStart+(delimeterIdx-inStart))
+		root.Right = constructTreeFromInOrderAndPostOrder(inorder, delimeterIdx+1, inEnd, postorder, postStart+(delimeterIdx-inStart), postEnd-1)
 
 		return root
 	}

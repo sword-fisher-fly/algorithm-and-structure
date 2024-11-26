@@ -198,7 +198,6 @@ func (t *BSTree) LevelTraversal() [][]any {
 	return LevelTraversal(t.root)
 }
 
-// TODO: Add/Delete/Search
 func (t *BSTree) SearchByRecursive(val any) *TreeNode {
 	return searchByRecursive(t.root, val)
 }

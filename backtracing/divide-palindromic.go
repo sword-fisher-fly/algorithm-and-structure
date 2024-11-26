@@ -21,7 +21,7 @@ func PalindromePartition(s string) [][]string {
 
 	var backtracking func(s string, startIndex int, path []string)
 	backtracking = func(s string, startIndex int, path []string) {
-		if startIndex >= len(s) {
+		if startIndex == len(s) {
 			tmp := make([]string, len(path))
 			copy(tmp, path)
 			res = append(res, tmp)
@@ -52,12 +52,15 @@ func computePalindrome(s string) [][]bool {
 
 	for i := len(s) - 1; i >= 0; i-- {
 		for j := i; j < len(s); j++ {
-			if i == j {
+			// if i == j {
+			// 	res[i][j] = true
+			// } else if j-i == 1 {
+			// 	res[i][j] = s[i] == s[j]
+			// } else {
+			// 	res[i][j] = (s[i] == s[j]) && res[i+1][j-1]
+			// }
+			if s[i] == s[j] && (j-i <= 1 || res[i+1][j-1]) {
 				res[i][j] = true
-			} else if j-i == 1 {
-				res[i][j] = s[i] == s[j]
-			} else {
-				res[i][j] = (s[i] == s[j]) && res[i+1][j-1]
 			}
 		}
 	}

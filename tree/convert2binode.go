@@ -24,17 +24,17 @@ func Convert2BiNode(t *TreeNode) *TreeNode {
 	// fmt.Printf("Initialize preNode=%v\n", preNode.Val)
 
 	var dfs func(*TreeNode)
-	dfs = func(root *TreeNode) {
-		if root == nil {
+	dfs = func(node *TreeNode) {
+		if node == nil {
 			return
 		}
 
-		dfs(root.Left)
+		dfs(node.Left)
 		// fmt.Printf("preNode=%v\n", preNode.Val)
-		preNode.Right = root
-		root.Left = nil
-		preNode = root
-		dfs(root.Right)
+		preNode.Right = node
+		node.Left = nil
+		preNode = node
+		dfs(node.Right)
 	}
 
 	// dfs(root) //ok

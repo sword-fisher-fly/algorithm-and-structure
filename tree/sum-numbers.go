@@ -49,7 +49,5 @@ func SumNumbersByLevelTraversal(root *TreeNode) int {
 		}
 	}
 
-	// queue = queue[levelSize:]
-
 	return sum
 }

@@ -68,8 +68,8 @@ func SwapPairs(head *ListNode) *ListNode {
 	// tmp2 = 3
 
 	for cur.Next != nil && cur.Next.Next != nil {
-		tmp1 := cur.Next
-		tmp2 := cur.Next.Next.Next
+		tmp1 := cur.Next           // 1
+		tmp2 := cur.Next.Next.Next // 3
 
 		cur.Next = cur.Next.Next  // dummyHead -> 2
 		cur.Next.Next = tmp1      // 2 -> 1

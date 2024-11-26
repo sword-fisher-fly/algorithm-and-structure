@@ -87,3 +87,66 @@ func (Codec) deserialize(data string) *TreeNode {
 
 	return build()
 }
+
+const MAGIC_NULL = "#"
+const SEPERATOR = "_"
+
+func Serialize(root *TreeNode) string {
+	// write code here
+	if root == nil {
+		return ""
+	}
+
+	sb := strings.Builder{}
+	queue := []*TreeNode{root}
+
+	for len(queue) > 0 {
+		cur := queue[0]
+		queue = queue[1:]
+
+		if cur == nil {
+			sb.WriteString(MAGIC_NULL)
+		} else {
+			sb.WriteString(strconv.Itoa(cur.Val.(int)))
+			queue = append(queue, cur.Left)
+			queue = append(queue, cur.Right)
+		}
+
+		sb.WriteString(SEPERATOR)
+	}
+
+	return sb.String()[:len(sb.String())-1]
+}
+func Deserialize(s string) *TreeNode {
+	// write code here
+	if len(s) == 0 {
+		return nil
+	}
+
+	ss := strings.Split(s, "_")
+	n := len(ss)
+
+	val, _ := strconv.Atoi(ss[0])
+	root := &TreeNode{Val: val}
+	queue := []*TreeNode{root}
+
+	for i := 1; i < n-1; i += 2 {
+		cur := queue[0]
+		queue = queue[1:]
+
+		left, right := ss[i], ss[i+1]
+		if left != MAGIC_NULL {
+			val, _ := strconv.Atoi(left)
+			cur.Left = &TreeNode{Val: val}
+			queue = append(queue, cur.Left)
+		}
+
+		if right != MAGIC_NULL {
+			val, _ := strconv.Atoi(right)
+			cur.Right = &TreeNode{Val: val}
+			queue = append(queue, cur.Right)
+		}
+	}
+
+	return root
+}

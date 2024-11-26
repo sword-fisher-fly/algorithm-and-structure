@@ -12,20 +12,20 @@ func reverse(s []byte, i, j int) {
 		i++
 		j--
 	}
-
-	return
 }
+
 func RotateString(s string, n int) string {
-	if n > len(s) {
-		n = n % len(s)
+	n = n % len(s)
+	if n > 0 {
+		bs := []byte(s)
+		reverse(bs, 0, len(s)-1)
+		reverse(bs, 0, n-1)
+		reverse(bs, n, len(s)-1)
+
+		return string(bs)
 	}
 
-	bs := []byte(s)
-	reverse(bs, 0, len(s)-1)
-	reverse(bs, 0, n-1)
-	reverse(bs, n, len(s)-1)
-
-	return string(bs)
+	return s
 }
 
 // "abcdedfg"

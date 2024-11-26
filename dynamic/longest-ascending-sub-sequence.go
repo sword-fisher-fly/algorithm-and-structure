@@ -15,14 +15,12 @@ func LongestAscendingSubSequence(arr []int) int {
 
 	for i := 1; i < len(arr); i++ {
 		for j := 0; j < i; j++ {
-			if arr[i] > arr[j] && dp[i] < dp[j]+1 {
-				dp[i] = dp[j] + 1
+			if arr[i] > arr[j] {
+				dp[i] = max(dp[i], dp[j]+1)
 			}
 		}
 
-		if result < dp[i] {
-			result = dp[i]
-		}
+		result = max(result, dp[i])
 	}
 
 	return result

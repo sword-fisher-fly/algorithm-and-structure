@@ -1,6 +1,6 @@
 package interview
 
-// dp[i][j]: 代表s[i..j]是否为回文字符串
+// dp[i][j]: 代表s[i..j-1]是否为回文字符串
 func LongestPalindromeByDP(s string) string {
 	dp := make([][]bool, len(s))
 	for i := range dp {

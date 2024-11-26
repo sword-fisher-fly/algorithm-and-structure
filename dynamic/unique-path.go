@@ -48,12 +48,20 @@ func UniquePathWithObstacles(m, n int, obstacles [][]bool) int {
 	}
 
 	// 障碍物以下的路径都不可达
-	for i := 0; i < m && !obstacles[i][0]; i++ {
+	for i := 0; i < m; i++ {
+		if obstacles[i][0] {
+			break
+		}
+
 		dp[i][0] = 1
 	}
 
 	// 障碍物右侧的路径都不可达
-	for j := 0; j < n && !obstacles[0][j]; j++ {
+	for j := 0; j < n; j++ {
+		if obstacles[0][j] {
+			break
+		}
+
 		dp[0][j] = 1
 	}
 

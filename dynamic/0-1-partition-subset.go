@@ -15,8 +15,8 @@ func CanPartition(nums []int) bool {
 
 	dp := make([]int, target+1)
 
-	for i := 0; i < len(nums); i++ {
-		for j := target; j >= nums[i]; j-- {
+	for i := 0; i < len(nums); i++ { // 物品
+		for j := target; j >= nums[i]; j-- { // 背包
 			dp[j] = max(dp[j], dp[j-nums[i]]+nums[i])
 		}
 	}

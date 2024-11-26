@@ -4,11 +4,17 @@ func Permutation(s string) []string {
 	result := make([]string, 0)
 	used := make([]bool, len(s))
 
+	cache := make(map[string]bool)
 	path := make([]rune, 0)
 	var backTracing func(string, []rune, []bool)
 
 	backTracing = func(s string, path []rune, used []bool) {
 		if len(path) == len(s) {
+			if cache[string(path)] {
+				return
+			}
+
+			cache[string(path)] = true
 			result = append(result, string(path))
 			return
 		}
