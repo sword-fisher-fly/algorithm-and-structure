@@ -85,7 +85,7 @@ func FindTargetSumWaysByBacktracing(nums []int, target int) int {
 			// res = append(res, tmp)
 			res++
 		}
-									
+
 		// fmt.Printf("in backtracing, sum=%d\n", sum)
 
 		for i := startIndex; i < len(candidates) && sum+candidates[i] <= bagSize; i++ {
@@ -117,7 +117,7 @@ func CoinChange(amount int, coins []int) int {
 	return dp[amount]
 }
 
-// dp[i]: 兑换总额为i的最小硬币数
+// dp[i]: 兑换总额为i的最小硬币数， coins数量都是1个？？
 func CoinChangeWithMinCount(coins []int, amount int) int {
 	dp := make([]int, amount+1)
 	for i := range dp {
