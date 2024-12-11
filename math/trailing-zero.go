@@ -24,7 +24,6 @@ func TrailingZerosII(n int) int {
 }
 
 func TrailingZeroesIII(n int) int {
-	T
 	if n < 5 {
 		return 0
 	}
