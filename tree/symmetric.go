@@ -30,6 +30,7 @@ func IsSymmetricByBFS(root *TreeNode) bool {
 	for len(stack) > 0 {
 		left := stack[len(stack)-2]
 		right := stack[len(stack)-1]
+		stack = stack[:len(stack)-2]
 
 		if left == nil && right == nil {
 			continue

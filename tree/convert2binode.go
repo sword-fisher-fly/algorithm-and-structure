@@ -30,7 +30,6 @@ func Convert2BiNode(t *TreeNode) *TreeNode {
 		}
 
 		dfs(node.Left)
-		// fmt.Printf("preNode=%v\n", preNode.Val)
 		preNode.Right = node
 		node.Left = nil
 		preNode = node

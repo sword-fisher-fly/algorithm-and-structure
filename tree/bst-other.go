@@ -36,6 +36,8 @@ var (
 	MAX_VAL = math.MinInt
 )
 
+// ??leetcode can not pass
+// https://leetcode.cn/problems/validate-binary-search-tree/?envType=study-plan-v2&envId=top-interview-150
 func IsValidBST(root *TreeNode) bool {
 	if root == nil {
 		return true

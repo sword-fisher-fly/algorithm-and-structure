@@ -31,17 +31,17 @@ func DiameterOfBinaryTree(root *TreeNode) int {
 
 	res := 0
 
-	var preOrder func(*TreeNode)
-	preOrder = func(t *TreeNode) {
+	var inOrder func(*TreeNode)
+	inOrder = func(t *TreeNode) {
 		if t != nil {
-			preOrder(t.Left)
+			inOrder(t.Left)
 			left, right := getDepth(t.Left), getDepth(t.Right)
-			fmt.Printf("left=%d, right=%d\n", left, right)
+			// fmt.Printf("left=%d, right=%d\n", left, right)
 			res = max(res, left+right)
-			preOrder(t.Right)
+			inOrder(t.Right)
 		}
 	}
-	preOrder(root)
+	inOrder(root)
 
 	return res
 }
