@@ -1,7 +1,5 @@
 package offer
 
-import "fmt"
-
 func MinEatingSpeed(piles []int, h int) int {
 	if len(piles) < 1 {
 		return 0
@@ -22,12 +20,10 @@ func MinEatingSpeed(piles []int, h int) int {
 		return cost
 	}
 
-	fmt.Printf("maxVal=%d\n", maxVal)
 	left, right := 1, maxVal
 	for left < right {
 		mid := left + (right-left)>>1
 		s := sum(mid)
-		fmt.Printf("left=%d, right=%d, mid=%d, s=%d\n", left, right, mid, s)
 		if s <= h {
 			right = mid
 		} else {

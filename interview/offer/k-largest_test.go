@@ -1,7 +1,6 @@
 package offer
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -16,28 +15,26 @@ func TestKthLargest(t *testing.T) {
 	kl.Add(8)
 	kl.Add(9)
 	kl.Add(10)
-	fmt.Printf("Add 10 kth largest: %v\n", kl.IntSlice)
-
 	kl.Add(11)
-	fmt.Printf("Add 11 kth largest: %v\n", kl.IntSlice)
-
 	t.Log(kl.Top())
 
 	kl.Add(12)
-	fmt.Printf("Add 12 kth largest: %v\n", kl.IntSlice)
 
 	t.Log(kl.Top())
 
 	kl.Add(13)
-	fmt.Printf("Add 13 kth largest: %v\n", kl.IntSlice)
-
 	t.Log(kl.Top())
 
 	kl.Add(7)
-	fmt.Printf("kth largest: %v\n", kl.IntSlice)
 	t.Log(kl.Top())
 
 	kl.Add(8)
-	fmt.Printf("kth largest: %v\n", kl.IntSlice)
 	t.Log(kl.Top())
+
+	t.Logf("Heap size: %d", kl.Len())
+
+	for i := 0; i < 10; i++ {
+		item := kl.Pop()
+		t.Logf("Pop item %d -> %d", i, item)
+	}
 }
